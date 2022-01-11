@@ -54,7 +54,7 @@ public class TestFacets {
         firstFacetValue.print();
         String firstKey = firstFacetValue.getKey();
         int firstValue = firstFacetValue.getValue();
-        String q = "((%s)) AND facet_%s:(\"%s\")".formatted(query,firstFacet.getName(),firstKey);
+        String q = "((%s)) AND facet_%s:(\"%s\")".format(query,firstFacet.getName(),firstKey);
         SearchParamSearchXExtended param1 = new SearchParamSearchXExtended(q);
         SearchService service1 = new SearchService();
         Result result1 = service1.SearchXExtended(frontend, param1);
@@ -94,7 +94,7 @@ public class TestFacets {
         String secondKey = secondFacetValue.getKey();
         int secondCount = secondFacetValue.getValue();
 
-        String q = "((%s)) AND facet_%s:(\"%s\" OR \"%s\")".formatted(query,firstFacet.getName(),firstKey, secondKey);
+        String q = "((%s)) AND facet_%s:(\"%s\" OR \"%s\")".format(query,firstFacet.getName(),firstKey, secondKey);
         SearchParamSearchXExtended param1 = new SearchParamSearchXExtended(q);
         SearchService service1 = new SearchService();
         Result result1 = service1.SearchXExtended(frontend, param1);
@@ -139,7 +139,7 @@ public class TestFacets {
         String secondKey = secondFacetValue.getKey();
         int secondCount = secondFacetValue.getValue();
 
-        String q = "((%s)) AND facet_%s:(\"%s\") AND facet_%s:(\"%s\")".formatted(query,firstFacet.getName(),firstKey, firstFacet.getName(),secondKey);
+        String q = "((%s)) AND facet_%s:(\"%s\") AND facet_%s:(\"%s\")".format(query,firstFacet.getName(),firstKey, firstFacet.getName(),secondKey);
         System.out.println(q);
         SearchParamSearchXExtended param1 = new SearchParamSearchXExtended(q);
         SearchService service1 = new SearchService();
@@ -197,7 +197,7 @@ public class TestFacets {
                 continue;
             }
             System.out.println("Key: " + key);
-            String q = "((%s)) AND facet_%s:(\"%s\")".formatted(query,facet.getName(),key);
+            String q = "((%s)) AND facet_%s:(\"%s\")".format(query,facet.getName(),key);
             System.out.println("Query: " + q);
             String qu = "((nuclear power)) AND facet_domain:(DOAJ Directory of Open Access Journals - Not for CDI Discovery)";
             //System.out.println("Query: " + qu);

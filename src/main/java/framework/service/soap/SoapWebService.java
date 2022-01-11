@@ -83,7 +83,7 @@ public class SoapWebService {
 
             // change these values as per soapui request on top left of request, click on RAW, you will find all the headers
             con.setRequestMethod("POST");
-            String content = "%s; charset=utf-8".formatted(contentType);
+            String content = "%s; charset=utf-8".format(contentType);
             con.setRequestProperty("Content-Type", content);
             //con.setRequestProperty("Content-Type","text/xml; charset=utf-8");
             con.setDoOutput(true);
@@ -122,7 +122,7 @@ public class SoapWebService {
 
             // change these values as per soapui request on top left of request, click on RAW, you will find all the headers
             con.setRequestMethod("GET");
-            String content = "%s; charset=utf-8".formatted(contentType);
+            String content = "%s; charset=utf-8".format(contentType);
             con.setRequestProperty("Content-Type", content);
             //con.setRequestProperty("Content-Type","text/xml; charset=utf-8");
             con.setDoOutput(true);

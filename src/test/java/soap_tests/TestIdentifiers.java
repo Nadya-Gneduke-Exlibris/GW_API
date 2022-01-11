@@ -105,7 +105,7 @@ public class TestIdentifiers {
     @Test(dataProvider = "ISSNs")
     public void searchByIssn(String issn)
     {
-        String query =  "issn:(%s)".formatted(issn);
+        String query =  "issn:(%s)".format(issn);
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend,param);
