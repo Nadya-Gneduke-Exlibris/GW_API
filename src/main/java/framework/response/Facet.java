@@ -59,4 +59,27 @@ public class Facet {
         }
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<FacetValue> getFacetValues() {
+        return facetValues;
+    }
+
+    public void setFacetValues(List<FacetValue> facetValues) {
+        this.facetValues = facetValues;
+    }
 }

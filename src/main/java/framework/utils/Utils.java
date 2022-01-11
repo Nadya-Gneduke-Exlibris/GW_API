@@ -4,6 +4,9 @@ import framework.response.Result;
 import org.apache.axis.encoding.Base64;
 import org.json.JSONObject;
 import org.json.XML;
+import org.w3c.dom.Node;
+
+import javax.xml.soap.SOAPBody;
 import java.io.UnsupportedEncodingException;
 
 import java.util.Locale;
@@ -129,6 +132,75 @@ public class Utils {
 
         return str;
     }
+
+    public static Result parseResponseToResult(SOAPBody body)
+    {
+        //System.out.println("Body returned: " + body);
+        Node a = body.getChildNodes().item(0);
+        if (a.getNodeName().contains("Fault"))
+        {
+            //TODO check return code
+            return null;
+        }
+
+        Node searchXResponse = body.getChildNodes().item(0);
+        Node searchXReturn = searchXResponse.getChildNodes().item(0);
+        Node xmlFragment = searchXReturn.getChildNodes().item(0);
+
+        //TODO check fault code
+        JSONObject fragment = XML.toJSONObject(xmlFragment.toString());
+        JSONObject xmlns = (JSONObject)fragment.get("xml-fragment");
+        JSONObject jagroot = xmlns.getJSONObject("sear:JAGROOT");
+        JSONObject res = jagroot.getJSONObject("sear:RESULT");
+
+        Result result = new Result();
+
+        result.loadDocSet(res);
+        result.loadFacetList(res);
+        result.loadHighlights(res);
+
+        return result;
+    }
+
+    public static Result parseResponseToResultCompressed(SOAPBody body)  {
+        System.out.println("Body returned: " + body);
+        Node searchXCompressedResponse = body.getChildNodes().item(0);
+        if (searchXCompressedResponse.getNodeName().contains("Fault"))
+        {
+            //TODO check return code
+            return null;
+        }
+
+        System.out.println("Node searchXCompressedResponse " + searchXCompressedResponse);
+        Node searchXCompressedReturn = searchXCompressedResponse.getChildNodes().item(0);
+        System.out.println("Node searchXCompressedReturn " + searchXCompressedReturn);
+        Node compressedResult = searchXCompressedReturn.getChildNodes().item(0);
+        System.out.println("Node compressedResult " + compressedResult);
+        //String decompressed = decompressStringAsUTF8(compressedResult.toString().getBytes("UTF-8"));
+        String decompressed = decompressString(compressedResult.toString());
+        System.out.println("Decompress " + decompressed);
+
+
+        //TODO check fault code
+        JSONObject fragment = XML.toJSONObject(decompressed);
+        System.out.println("fragment: " + fragment);
+        JSONObject xmlns = (JSONObject)fragment.get("xml-fragment");
+        System.out.println("xmlns: " + xmlns);
+        JSONObject jagroot = xmlns.getJSONObject("sear:JAGROOT");
+        System.out.println("jagroot: " + jagroot);
+        JSONObject res = jagroot.getJSONObject("sear:RESULT");
+        System.out.println("res: " + res);
+
+        Result result = new Result();
+
+        result.loadDocSet(res);
+        result.loadFacetList(res);
+        result.loadHighlights(res);
+
+        return result;
+    }
+
+
 
 
 

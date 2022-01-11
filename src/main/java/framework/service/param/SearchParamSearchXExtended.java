@@ -25,24 +25,24 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         this.explainDocId = explainDocId;
     }
 
-    /*public SearchParamSearchXExtended(String query, String institution, String categories)
-    {
-        super(query, "rank", "", "eng","1","5","false", institution,"false");
-        this.reverse = "false";
-        this.sessionId = "api:searchX";
-        this.version = "4.0.0";
-        this.categories = categories;
-        this.degree = "";
-        this.explain = "false";
-        this.explainDocId = "";
-    }*/
-
     public SearchParamSearchXExtended(String query, String institution, String categories, String strTake)
     {
         super(query, "rank", "", "eng","1",strTake,"false", institution,"false");
         this.reverse = "false";
         this.sessionId = "api:searchX";
-        this.version = "4.0.0";
+        this.version = "4.9.27";
+        this.categories = categories;
+        this.degree = "";
+        this.explain = "false";
+        this.explainDocId = "";
+    }
+
+    public SearchParamSearchXExtended(String query,  String sort, String reverse, String categories, String strTake)
+    {
+        super(query, sort, "", "eng","1",strTake,"false", "01HVD.01HVD.PPRD","false");
+        this.reverse = reverse;
+        this.sessionId = "api:searchX";
+        this.version = "4.9.27";
         this.categories = categories;
         this.degree = "";
         this.explain = "false";
@@ -54,8 +54,8 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         super();
         this.reverse = "false";
         this.sessionId = "api:searchX";
-        this.version = "4.0.0";
-        this.categories = "searchCDI=true;isNewUi;";
+        this.version = "4.9.27";
+        this.categories = ";isRelatedItems=false;newspapersActive=false;refEntryActive=true;excludeCdiEbooks=false;useConVoc;isNewUi;isNotBlended;cdiServicesDataFromPnx;";
         this.degree = "";
         this.explain = "false";
         this.explainDocId = "";
@@ -66,8 +66,8 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         super(query);
         this.reverse = "false";
         this.sessionId = "api:searchX";
-        this.version = "4.0.0";
-        this.categories = "";
+        this.version = "4.9.27";
+        this.categories = ";isRelatedItems=false;newspapersActive=false;refEntryActive=true;excludeCdiEbooks=false;useConVoc;isNewUi;isNotBlended;cdiServicesDataFromPnx";
         this.degree = "";
         this.explain = "false";
         this.explainDocId = "";
@@ -78,8 +78,8 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         super(query, sort);
         this.reverse = "false";
         this.sessionId = "api:searchX";
-        this.version = "4.0.0";
-        this.categories = "searchCDI=true;isNewUi;";
+        this.version = "4.9.27";
+        this.categories = ";isRelatedItems=false;newspapersActive=false;refEntryActive=true;excludeCdiEbooks=false;useConVoc;isNewUi;isNotBlended;cdiServicesDataFromPnx";
         this.degree = "";
         this.explain = "false";
         this.explainDocId = "";
@@ -90,8 +90,8 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         super(query, sort, strTake);
         this.reverse = "false";
         this.sessionId = "api:searchX";
-        this.version = "4.0.0";
-        this.categories = "searchCDI=true;isNewUi;";
+        this.version = "4.9.27";
+        this.categories = ";isRelatedItems=false;newspapersActive=false;refEntryActive=true;excludeCdiEbooks=false;useConVoc;isNewUi;isNotBlended;cdiServicesDataFromPnx";
         this.degree = "";
         this.explain = "false";
         this.explainDocId = "";

@@ -4,7 +4,10 @@ import framework.service.param.SearchParamSearchXExtended;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import javax.xml.soap.SOAPBody;
+
 import static framework.utils.Constants.API_TEST;
+import static framework.utils.Constants.FACETCOUNTCOMPRESSEDCATEGORIESLANGUAGES;
 import static framework.utils.Constants.SEARCHXENDING;
 
 public class FacetCount {
@@ -16,13 +19,16 @@ public class FacetCount {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
         SearchService service = new SearchService();
         FacetList result = service.facetCountXMLRequest(frontend, param);
+
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
-
         result.print();
     }
+
+
+
 
 
 

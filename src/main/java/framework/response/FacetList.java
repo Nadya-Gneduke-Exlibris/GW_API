@@ -43,5 +43,19 @@ public class FacetList {
         }
     }
 
+    public List<Facet> getFacets() {
+        return facets;
+    }
 
+    public void setFacets(List<Facet> facets) {
+        this.facets = facets;
+    }
+
+    public boolean isAccurateCounters() {
+        return accurateCounters;
+    }
+
+    public void setAccurateCounters(boolean accurateCounters) {
+        this.accurateCounters = accurateCounters;
+    }
 }

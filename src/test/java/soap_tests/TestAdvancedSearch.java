@@ -1,3 +1,5 @@
+package soap_tests;
+
 import framework.response.Doc;
 import framework.response.Docset;
 import framework.response.PrimoNMBib;
@@ -58,7 +60,7 @@ public class TestAdvancedSearch {
         String searchTerms = "green frog";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -85,7 +87,7 @@ public class TestAdvancedSearch {
         String startswith = "green";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -100,8 +102,8 @@ public class TestAdvancedSearch {
             searchTermExists = checkTermsInDisplay(display, searchTerms);
             assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
             assertThat("title should starts with given term", (display.getTitle().toLowerCase().startsWith(startswith) ||
-                                                                      display.getTitle().toLowerCase().startsWith("the " + startswith) ||
-                                                                      display.getTitle().toLowerCase().startsWith("a " + startswith)));
+                    display.getTitle().toLowerCase().startsWith("the " + startswith) ||
+                    display.getTitle().toLowerCase().startsWith("a " + startswith)));
         }
     }
 
@@ -113,7 +115,7 @@ public class TestAdvancedSearch {
         String exactMatch = "black cat";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -142,7 +144,7 @@ public class TestAdvancedSearch {
         String searchTerms = "green frog";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -167,7 +169,7 @@ public class TestAdvancedSearch {
         String searchTerms = "green";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -199,7 +201,7 @@ public class TestAdvancedSearch {
         String language = "ger";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -230,7 +232,7 @@ public class TestAdvancedSearch {
         String rType = "books";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -260,7 +262,7 @@ public class TestAdvancedSearch {
         String creationDate = "2020";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -289,7 +291,7 @@ public class TestAdvancedSearch {
         String creator = "Peter";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
@@ -317,7 +319,7 @@ public class TestAdvancedSearch {
         String subject = "biology";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
