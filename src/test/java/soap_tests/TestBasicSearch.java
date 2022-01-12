@@ -27,7 +27,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TestBasicSearch {
     public String frontend = API_TEST + SEARCHXENDING;
 
-    @Test
+
+    @Test(enabled = false)
     public void resultsReturned()
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
@@ -45,7 +46,8 @@ public class TestBasicSearch {
                 docSet.getTotalHits() > 0);
     }
 
-    @Test
+
+    @Test(enabled = false)
     public void resultsReturnedWithDifferentPCkeys()
     {
         SearchParamSearchXExtended harvardParam = new SearchParamSearchXExtended("test",HARVARDPCKEY,"","5");
@@ -80,7 +82,8 @@ public class TestBasicSearch {
 
 
 
-    @Test
+
+    @Test(enabled = false)
     public void resultsReturnedCompressed()
     {
         String query = "GiraffE";
@@ -100,7 +103,8 @@ public class TestBasicSearch {
                 docSet.getTotalHits() > 0);
     }
 
-    @Test
+
+    @Test(enabled = false)
     public void searchTermInTitle() {
 
         String query = "title:(photosynthesis)";
@@ -127,7 +131,8 @@ public class TestBasicSearch {
         }
     }
 
-    @Test
+
+    @Test(enabled = false)
     public void searchTermInSubject() {
 
         String query = "(sub:(wateR)";
@@ -157,7 +162,8 @@ public class TestBasicSearch {
         }
     }
 
-    @Test
+
+    @Test(enabled = false)
     public void searchTermInCreator() {
 
         String query = "(creator:(john)";
@@ -190,7 +196,7 @@ public class TestBasicSearch {
 
 
 
-    @Test
+    @Test(enabled = false)
     public void hebrewSearch() {
 
         //TODO fix. something with encoding
@@ -273,12 +279,13 @@ public class TestBasicSearch {
 
             }
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
     }
 
 
-    @Test
+
+    @Test(enabled = false)
     public void severalWordsSearchTerm() {
 
         //TODO fix
@@ -329,7 +336,7 @@ public class TestBasicSearch {
 
             }
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
     }
 
@@ -356,7 +363,8 @@ public class TestBasicSearch {
         return data.iterator();
     }
 
-    @Test(dataProvider = "recordsIds")
+
+    @Test(dataProvider = "recordsIds", enabled = false)
     public void recordID(String id) {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(id);
         SearchService service = new SearchService();
@@ -379,8 +387,7 @@ public class TestBasicSearch {
     }
 
 
-
-    @Test
+    @Test(enabled = false)
     public void startsWith() {
 
         String term = "Richard";
@@ -408,7 +415,8 @@ public class TestBasicSearch {
         }
     }
 
-    @Test
+
+    @Test(enabled = false)
     public void wildCard()  {
         String term = "powe";
         boolean searchTermExists = false;
@@ -454,7 +462,7 @@ public class TestBasicSearch {
                 searchTermExists = searchTermExists || subject.contains(term);
             }
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
 
     }
