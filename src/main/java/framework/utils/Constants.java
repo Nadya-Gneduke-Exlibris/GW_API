@@ -9,6 +9,7 @@ public class Constants {
     public static final String API_TEST = "http://api1.test.cdi.dc04.hosted.exlibrisgroup.com:8011";
 
     public static final String API_PREVIEW = "http://api1.preview.cdi.dc04.hosted.exlibrisgroup.com:8011";
+    public static final String API_PRODUCTION = "http://api1.prod.cdi.dc04.hosted.exlibrisgroup.com:8011";
 
     public static final String SEARCHXENDING = "/PrimoWebServices/services/primo/JaguarPrimoSearcher";
 

@@ -17,6 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import static framework.utils.Constants.API_PREVIEW;
+import static framework.utils.Constants.API_PRODUCTION;
 import static framework.utils.Constants.API_TEST;
 import static framework.utils.Constants.HARVARDPCKEY;
 import static framework.utils.Constants.LOADBALANCER;
@@ -25,10 +27,10 @@ import static framework.utils.Constants.SUPPORTPCKEY;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBasicSearch {
-    public String frontend = API_TEST + SEARCHXENDING;
+    public String frontend = API_PREVIEW + SEARCHXENDING;
 
 
-    @Test(enabled = false)
+    @Test()
     public void resultsReturned()
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
