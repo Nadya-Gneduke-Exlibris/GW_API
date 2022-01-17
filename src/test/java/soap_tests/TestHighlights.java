@@ -40,6 +40,7 @@ public class TestHighlights {
                     if (term.getValue().toLowerCase().contains(query))
                     {
                         highlightExists = true;
+                        break;
                     }
                 }
             }

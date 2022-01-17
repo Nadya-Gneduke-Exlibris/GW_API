@@ -43,7 +43,7 @@ public class SearchService {
     {
         SoapWebService service = new SoapWebService();
         SOAPBody body = service.callSoapWebServiceSearchXExtended(frontend, param, false);
-        System.out.println(body);
+        System.out.println("Result: " + body);
         Result result = Utils.parseResponseToResult(body);
         return result;
     }
