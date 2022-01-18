@@ -409,7 +409,7 @@ public class SoapWebService {
             searchX = soapBody.addChildElement("searchX",myApi);
         }
 
-        searchX.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
+        //searchX.addAttribute( encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         SOAPElement query = searchX.addChildElement("query", "");
         query.addTextNode(param.getQuery());
         query.addAttribute(type, "soapenc:string");
