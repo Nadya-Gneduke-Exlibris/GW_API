@@ -58,7 +58,7 @@ public class SoapWebService {
             SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
             SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
-            System.out.println(frontend);
+            System.out.println("Frontend " + frontend);
 
             SOAPMessage soapResponse = soapConnection.call(createSOAPRequestSearchXExtended(param, compressed), frontend);
 

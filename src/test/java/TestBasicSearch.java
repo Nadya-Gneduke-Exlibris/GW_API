@@ -31,6 +31,7 @@ public class TestBasicSearch {
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
         SearchService service = new SearchService();
+        System.out.println("Start testing");
         Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
