@@ -167,10 +167,10 @@ public class SoapWebService {
 
             MimeHeaders mimeHeaders = new MimeHeaders();
             mimeHeaders.setHeader("SOAPAction", "ddd");
-            mimeHeaders.addHeader("Content-Type", "text/xml");
+            //mimeHeaders.addHeader("Content-Type", "text/xml");
             mimeHeaders.addHeader("cache-control", "no-cache");
 
-            //mimeHeaders.addHeader("Content-Type", "application/soap+xml");
+            mimeHeaders.addHeader("Content-Type", "application/soap+xml");
 
             SOAPMessage soapMessage = messageFactory.createMessage(mimeHeaders, new ByteArrayInputStream(xmlRequest.getBytes()));
 
