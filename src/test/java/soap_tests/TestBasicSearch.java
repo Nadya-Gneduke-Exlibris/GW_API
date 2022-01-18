@@ -30,7 +30,7 @@ public class TestBasicSearch {
     public String frontend = API_PREVIEW + SEARCHXENDING;
 
 
-    @Test()
+    @Test(enabled = false)
     public void resultsReturned()
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
@@ -229,7 +229,7 @@ public class TestBasicSearch {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void oneWordSearchTerm() {
 
         String query = "photosynthesis";
