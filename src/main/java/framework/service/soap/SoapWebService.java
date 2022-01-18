@@ -395,95 +395,97 @@ public class SoapWebService {
         SOAPEnvelope envelope = soapPart.getEnvelope();
         envelope.addNamespaceDeclaration(myApi, myNamespaceURI);
 
+
         // SOAP Body
         SOAPBody soapBody = envelope.getBody();
         SOAPElement searchX;
         if (compressed == true)
         {
             searchX = soapBody.addChildElement("searchXCompressed", myApi);
+
         }
         else
         {
             searchX = soapBody.addChildElement("searchX",myApi);
         }
 
-        //searchX.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
-        SOAPElement query = searchX.addChildElement("query",null);
+        searchX.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
+        SOAPElement query = searchX.addChildElement("query", "");
         query.addTextNode(param.getQuery());
         query.addAttribute(type, "soapenc:string");
         query.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
 
-        SOAPElement sort = searchX.addChildElement("sort",null);
+        SOAPElement sort = searchX.addChildElement("sort", "");
         sort.addAttribute(type, "soapenc:string");
         sort.addTextNode(param.getSort());
         sort.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
 
-        SOAPElement reverse = searchX.addChildElement("reverse",null);
+        SOAPElement reverse = searchX.addChildElement("reverse","");
         reverse.addAttribute(type, "xsd:boolean");
         reverse.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         reverse.addTextNode(param.getReverse());
 
-        SOAPElement strDidumean = searchX.addChildElement("strDidumean",null);
+        SOAPElement strDidumean = searchX.addChildElement("strDidumean","");
         strDidumean.addAttribute(type, "soapenc:string");
         strDidumean.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         strDidumean.addTextNode(param.getStrDidumean());
 
-        SOAPElement language = searchX.addChildElement("language",null);
+        SOAPElement language = searchX.addChildElement("language","");
         language.addAttribute(type, "soapenc:string");
         language.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         language.addTextNode(param.getLanguage());
 
-        SOAPElement strFrom = searchX.addChildElement("strFrom",null);
+        SOAPElement strFrom = searchX.addChildElement("strFrom","");
         strFrom.addAttribute(type, "soapenc:string");
         strFrom.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         strFrom.addTextNode(param.getStrFrom());
 
-        SOAPElement strTake = searchX.addChildElement("strTake",null);
+        SOAPElement strTake = searchX.addChildElement("strTake","");
         strTake.addAttribute(type, "soapenc:string");
         strTake.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         strTake.addTextNode(param.getStrTake());
 
-        SOAPElement asFull = searchX.addChildElement("asFull",null);
+        SOAPElement asFull = searchX.addChildElement("asFull","");
         asFull.addAttribute(type, "xsd:boolean");
         asFull.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         asFull.addTextNode(param.getAsFull());
 
-        SOAPElement institution = searchX.addChildElement("institution",null);
+        SOAPElement institution = searchX.addChildElement("institution","");
         institution.addAttribute(type, "soapenc:string");
         institution.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         institution.addTextNode(param.getInstitution());
 
-        SOAPElement affiliatedUser = searchX.addChildElement("affiliatedUser",null);
+        SOAPElement affiliatedUser = searchX.addChildElement("affiliatedUser","");
         affiliatedUser.addAttribute(type, "xsd:boolean");
         affiliatedUser.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         affiliatedUser.addTextNode(param.getAffiliatedUser());
 
-        SOAPElement sessionId = searchX.addChildElement("sessionId",null);
+        SOAPElement sessionId = searchX.addChildElement("sessionId","");
         sessionId.addAttribute(type, "soapenc:string");
         sessionId.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         sessionId.addTextNode(param.getSessionId());
 
-        SOAPElement version = searchX.addChildElement("version",null);
+        SOAPElement version = searchX.addChildElement("version","");
         version.addAttribute(type, "soapenc:string");
         version.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         version.addTextNode(param.getVersion());
 
-        SOAPElement categories = searchX.addChildElement("categories",null);
+        SOAPElement categories = searchX.addChildElement("categories","");
         categories.addAttribute(type, "soapenc:string");
         categories.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         categories.addTextNode(param.getCategories());
 
-        SOAPElement degree = searchX.addChildElement("degree",null);
+        SOAPElement degree = searchX.addChildElement("degree","");
         degree.addAttribute(type, "soapenc:string");
         degree.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         degree.addTextNode(param.getDegree());
 
-        SOAPElement explain = searchX.addChildElement("explain",null);
+        SOAPElement explain = searchX.addChildElement("explain","");
         explain.addAttribute(type, "xsd:boolean");
         explain.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         explain.addTextNode(param.getExplain());
 
-        SOAPElement explainDocId = searchX.addChildElement("explainDocId",null);
+        SOAPElement explainDocId = searchX.addChildElement("explainDocId","");
         explainDocId.addAttribute(type, "soapenc:string");
         explainDocId.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         explainDocId.addTextNode(param.getExplainDocId());
