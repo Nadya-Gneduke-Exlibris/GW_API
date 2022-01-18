@@ -16,13 +16,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import static framework.utils.Constants.API_PREVIEW;
+import static framework.utils.Constants.API_TEST;
 import static framework.utils.Constants.HARVARDPCKEY;
 import static framework.utils.Constants.SEARCHXENDING;
 import static framework.utils.Constants.SUPPORTPCKEY;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBasicSearch {
-    public String frontend = API_PREVIEW + SEARCHXENDING;
+    public String frontend = API_TEST + SEARCHXENDING;
 
 
     @Test()
