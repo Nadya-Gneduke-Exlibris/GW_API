@@ -225,7 +225,7 @@ public class TestBasicSearch {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void oneWordSearchTerm() {
 
         String query = "photosynthesis";
