@@ -19,7 +19,7 @@ import static framework.utils.Utils.normalizeString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Assert;
 
-public class TestSorts {
+public class TestSorts1 {
     public String frontend = API_TEST + SEARCHXENDING;
 
     @Test
