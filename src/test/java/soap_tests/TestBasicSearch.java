@@ -30,7 +30,7 @@ public class TestBasicSearch {
     public String frontend = API_PREVIEW + SEARCHXENDING;
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void resultsReturned()
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
