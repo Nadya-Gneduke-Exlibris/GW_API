@@ -22,11 +22,11 @@ import static framework.utils.Constants.SEARCHXENDING;
 import static framework.utils.Constants.SUPPORTPCKEY;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestBasicSearch {
+public class TestBasicSearch3 {
     public String frontend = API_TEST + SEARCHXENDING;
 
 
-    @Test()
+    @Test(enabled = false)
     public void resultsReturned()
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
