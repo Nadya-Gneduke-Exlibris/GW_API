@@ -27,15 +27,35 @@ import static framework.utils.Constants.SUPPORTPCKEY;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBasicSearch {
-    public String frontend = API_PREVIEW + SEARCHXENDING;
+    public String frontend = API_TEST + SEARCHXENDING;
 
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void resultsReturned()
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
+        if (result == null)
+        {
+            throw new SkipException("The result returned null");
+        }
+
+        Docset docSet = result.getDocSet();
+
+        System.out.println("Total hits: " + docSet.getTotalHits());
+        assertThat("Total hits should be greater than zero",
+                docSet.getTotalHits() > 0);
+    }
+
+    //TODO remove from Class
+    @Test(enabled = false)
+    public void resultsReturnedXML()
+    {
+        SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
+        SearchService service = new SearchService();
+        Result result = service.searchXCompressedXMLRequest(frontend, param);
+
         if (result == null)
         {
             throw new SkipException("The result returned null");

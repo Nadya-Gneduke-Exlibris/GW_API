@@ -21,6 +21,7 @@ public class SearchService {
 
 
     public Result searchXMLRequest(String frontend, SearchParamSearchXExtended param)  {
+        System.out.println(buildSearchXExtendedRequest(param));
         String strRes = postRequest(frontend,buildSearchXExtendedRequest(param));
         System.out.println(strRes);
         Result res = parseStringResponseToResultSearchX(strRes);
@@ -28,6 +29,10 @@ public class SearchService {
     }
 
     public Result searchXCompressedXMLRequest(String frontend, SearchParamSearchXExtended param)  {
+        System.out.println("JOPA");
+        String st = buildSearchXExtendedCompressedRequest(param);
+        System.out.println(st);
+        System.out.println(buildSearchXExtendedCompressedRequest(param));
         String s = postRequest(frontend,buildSearchXExtendedCompressedRequest(param));
         Result res = parseStringCompressedResponseToResult(s);
         return res;
