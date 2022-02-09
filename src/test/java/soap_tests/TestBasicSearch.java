@@ -30,7 +30,7 @@ public class TestBasicSearch {
     public String frontend = API_PREVIEW + SEARCHXENDING;
 
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void resultsReturned()
     {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
@@ -46,6 +46,12 @@ public class TestBasicSearch {
         System.out.println("Total hits: " + docSet.getTotalHits());
         assertThat("Total hits should be greater than zero",
                 docSet.getTotalHits() > 0);
+    }
+
+    @Test
+    public void dummyTest()
+    {
+        System.out.println("Dummy");
     }
 
 
