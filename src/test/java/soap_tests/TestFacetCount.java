@@ -17,6 +17,7 @@ import static framework.utils.Constants.SEARCHXENDING;
 public class TestFacetCount {
     public String frontend = API_TEST + SEARCHXENDING;
 
+    //TODO add counter checks
     @Test
     public void facetCountCompressedCategoriesLanguages() {
         SearchService service = new SearchService();
