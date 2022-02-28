@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 import static framework.utils.Constants.API_TEST;
 import static framework.utils.Constants.CITEDBY;
-import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -45,21 +44,18 @@ public class TestCitedBy {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "rank", "10");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
         boolean citedByExists = false;
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
             String citedBy = display.getCitedBy();
-            if (citedBy != null)
-            {
+            if (citedBy != null) {
                 citedByExists = true;
             }
         }

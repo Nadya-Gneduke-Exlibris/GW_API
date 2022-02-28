@@ -1,14 +1,10 @@
 package soap_tests;
 
-import framework.response.Doc;
 import framework.response.Docset;
 import framework.response.Facet;
 import framework.response.FacetList;
 import framework.response.FacetValue;
-import framework.response.PrimoNMBib;
-import framework.response.Record;
 import framework.response.Result;
-import framework.response.record.Control;
 import framework.service.SearchService;
 import framework.service.param.SearchParamSearchXExtended;
 import org.testng.SkipException;
@@ -16,14 +12,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static framework.utils.Constants.API_CI;
-import static framework.utils.Constants.API_PREVIEW;
 import static framework.utils.Constants.API_TEST;
-import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -32,14 +24,12 @@ public class TestFacets {
     public String query = "nuclear power";
 
     @Test
-    public void countFromFacetListEqualsToSearchWithFacet()
-    {
+    public void countFromFacetListEqualsToSearchWithFacet() {
         String query = "nuclear power";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtendedCompressed(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -50,12 +40,11 @@ public class TestFacets {
         firstFacetValue.print();
         String firstKey = firstFacetValue.getKey();
         int firstValue = firstFacetValue.getValue();
-        String q = String.format("((%s)) AND facet_%s:(\"%s\")", query,firstFacet.getName(),firstKey);
+        String q = String.format("((%s)) AND facet_%s:(\"%s\")", query, firstFacet.getName(), firstKey);
         SearchParamSearchXExtended param1 = new SearchParamSearchXExtended(q);
         SearchService service1 = new SearchService();
         Result result1 = service1.SearchXExtended(frontend, param1);
-        if (result1 == null)
-        {
+        if (result1 == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -65,13 +54,11 @@ public class TestFacets {
     }
 
     @Test
-    public void countOfTwoFacetsWithOR()
-    {
+    public void countOfTwoFacetsWithOR() {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtendedCompressed(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -90,12 +77,11 @@ public class TestFacets {
         String secondKey = secondFacetValue.getKey();
         int secondCount = secondFacetValue.getValue();
 
-        String q = String.format("((%s)) AND facet_%s:(\"%s\" OR \"%s\")", query,firstFacet.getName(),firstKey, secondKey);
+        String q = String.format("((%s)) AND facet_%s:(\"%s\" OR \"%s\")", query, firstFacet.getName(), firstKey, secondKey);
         SearchParamSearchXExtended param1 = new SearchParamSearchXExtended(q);
         SearchService service1 = new SearchService();
         Result result1 = service1.SearchXExtended(frontend, param1);
-        if (result1 == null)
-        {
+        if (result1 == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -106,13 +92,11 @@ public class TestFacets {
     }
 
     @Test
-    public void countOfTwoFacetsWithAND()
-    {
+    public void countOfTwoFacetsWithAND() {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtendedCompressed(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -132,13 +116,12 @@ public class TestFacets {
         String secondKey = secondFacetValue.getKey();
         int secondCount = secondFacetValue.getValue();
 
-        String q = String.format("((%s)) AND facet_%s:(\"%s\") AND facet_%s:(\"%s\")", query,firstFacet.getName(),firstKey, firstFacet.getName(),secondKey);
+        String q = String.format("((%s)) AND facet_%s:(\"%s\") AND facet_%s:(\"%s\")", query, firstFacet.getName(), firstKey, firstFacet.getName(), secondKey);
 
         SearchParamSearchXExtended param1 = new SearchParamSearchXExtended(q);
         SearchService service1 = new SearchService();
         Result result1 = service1.SearchXExtended(frontend, param1);
-        if (result1 == null)
-        {
+        if (result1 == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -147,7 +130,6 @@ public class TestFacets {
         assertThat("Facet count should be more than the each first facet count",
                 (docSet.getTotalHits() < firstCount && docSet.getTotalHits() < secondCount));
     }
-
 
 
     @DataProvider(name = "facetNamesAndValues")
@@ -162,10 +144,8 @@ public class TestFacets {
         FacetList facetList = result.getFacetList();
         List<Facet> facets = facetList.getFacets();
 
-        for (Facet facet : facets)
-        {
-            if (!facet.getName().contains("date"))
-            {
+        for (Facet facet : facets) {
+            if (!facet.getName().contains("date")) {
                 data.add(new Object[]{facet});
             }
 
@@ -175,27 +155,23 @@ public class TestFacets {
     }
 
     @Test(dataProvider = "facetNamesAndValues")
-    public void facetsReturnResults(Facet facet)
-    {
+    public void facetsReturnResults(Facet facet) {
 
         //facet.print();
         List<FacetValue> facetValues = facet.getFacetValues();
-        for (FacetValue facetValue : facetValues)
-        {
+        for (FacetValue facetValue : facetValues) {
             String key = facetValue.getKey();
-            if(key.contains("Not for CDI"))
-            {
+            if (key.contains("Not for CDI")) {
                 continue;
             }
 
-            String q = "((%s)) AND facet_%s:(\"%s\")".format(query,facet.getName(),key);
+            String q = "((%s)) AND facet_%s:(\"%s\")".format(query, facet.getName(), key);
 
             SearchParamSearchXExtended param1 = new SearchParamSearchXExtended(q);
             SearchService service1 = new SearchService();
             Result result1 = service1.SearchXExtendedCompressed(frontend, param1);
 
-            if (result1 == null)
-            {
+            if (result1 == null) {
                 throw new SkipException("The result returned null");
             }
 
@@ -205,9 +181,6 @@ public class TestFacets {
                     docSet.getTotalHits() > 0);
         }
     }
-
-
-
 
 
 }

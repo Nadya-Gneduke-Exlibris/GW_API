@@ -22,7 +22,6 @@ public class Constants {
     public static final String NEWMEXPCKEY = "01NEWMEX.01NEWMEX_INST_CDI_DEMO_LIB.PSTG";
     public static final String SUPPORTPCKEY = "972SUPPORT.SUPPORT.PPRD";
 
-
     public static final String CDI_PROD = "searchCDI=true";
     public static final String CDI_TEST = "searchCDI=test";
     public static final String CDI_PREVIEW = "searchCDI=preview";
@@ -95,7 +94,6 @@ public class Constants {
             "      </api:searchX>\n" +
             "   </soapenv:Body>\n" +
             "</soapenv:Envelope>\n";
-
 
 
     public static String FACETCOUNTCOMPRESSED = "<soapenv:Envelope xmlns:api=\"http://api.ws.primo.exlibris.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><soapenv:Header></soapenv:Header>\n" +
@@ -1010,7 +1008,7 @@ public class Constants {
             "   </soapenv:Body>\n" +
             "</soapenv:Envelope>\n";
 
-    public static String FACETCOUNTCOMPRESSEDCATEGORIESLANGUAGES =  "<soapenv:Envelope xmlns:api=\"http://api.ws.primo.exlibris.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><soapenv:Header></soapenv:Header>\n" +
+    public static String FACETCOUNTCOMPRESSEDCATEGORIESLANGUAGES = "<soapenv:Envelope xmlns:api=\"http://api.ws.primo.exlibris.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><soapenv:Header></soapenv:Header>\n" +
             "\n" +
             "   <soapenv:Body>\n" +
             "      <api:countFacetsCompressedWithCategories soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n" +
@@ -1217,7 +1215,6 @@ public class Constants {
             "      </api:searchXCompressed>\n" +
             "   </soapenv:Body>\n" +
             "</soapenv:Envelope>\n";
-
 
 
     public static String searchX = "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:api=\"http://api.ws.primo.exlibris.com\">\n" +

@@ -9,21 +9,17 @@ import java.util.List;
 public class Highlights {
     private List<Highlight> highlights;
 
-    public void print()
-    {
-        for (Highlight highlight: this.highlights)
-        {
+    public void print() {
+        for (Highlight highlight : this.highlights) {
             highlight.print();
         }
     }
 
 
-    public void load(JSONObject json)
-    {
+    public void load(JSONObject json) {
         this.highlights = new ArrayList<>();
 
-        if (json.get("sear:HIGHLIGHT").toString().startsWith("{"))
-        {
+        if (json.get("sear:HIGHLIGHT").toString().startsWith("{")) {
             JSONObject jsonHiglight = json.getJSONObject("sear:HIGHLIGHT");
             Highlight highlight = new Highlight();
             highlight.load(jsonHiglight);
@@ -32,8 +28,7 @@ public class Highlights {
         }
         JSONArray jsonHighlights = json.getJSONArray("sear:HIGHLIGHT");
 
-        for (Object jsonHighlight : jsonHighlights)
-        {
+        for (Object jsonHighlight : jsonHighlights) {
             Highlight highlight = new Highlight();
             highlight.load((JSONObject) jsonHighlight);
             this.highlights.add(highlight);
@@ -47,7 +42,6 @@ public class Highlights {
     public void setHighlights(List<Highlight> highlights) {
         this.highlights = highlights;
     }
-
 
 
 }

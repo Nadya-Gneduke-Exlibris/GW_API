@@ -1,8 +1,7 @@
 package framework.service.param;
 
 
-public class SearchParamSearchX
-{
+public class SearchParamSearchX {
     private String query;
     private String sort;
     private String strDidumean;
@@ -13,10 +12,9 @@ public class SearchParamSearchX
     private String institution;
     private String affiliatedUser;
 
-    public SearchParamSearchX( String query, String sort, String strDidumean,
-                                      String language, String strFrom, String strTake, String asFull, String institution,
-                                      String affiliatedUser)
-    {
+    public SearchParamSearchX(String query, String sort, String strDidumean,
+                              String language, String strFrom, String strTake, String asFull, String institution,
+                              String affiliatedUser) {
         this.query = query;
         this.sort = sort;
         this.strDidumean = strDidumean;
@@ -29,8 +27,7 @@ public class SearchParamSearchX
     }
 
 
-    public SearchParamSearchX()
-    {
+    public SearchParamSearchX() {
         this.query = "nuclear power";
         this.sort = "rank";
         this.strDidumean = "";
@@ -42,8 +39,7 @@ public class SearchParamSearchX
         this.affiliatedUser = "true";
     }
 
-    public SearchParamSearchX(String query)
-    {
+    public SearchParamSearchX(String query) {
         this.query = query;
         this.sort = "rank";
         this.strDidumean = "";
@@ -55,8 +51,7 @@ public class SearchParamSearchX
         this.affiliatedUser = "true";
     }
 
-    public SearchParamSearchX(String query, String sort)
-    {
+    public SearchParamSearchX(String query, String sort) {
         this.query = query;
         this.sort = sort;
         this.strDidumean = "";
@@ -68,8 +63,7 @@ public class SearchParamSearchX
         this.affiliatedUser = "true";
     }
 
-    public SearchParamSearchX(String query, String sort, String strTake)
-    {
+    public SearchParamSearchX(String query, String sort, String strTake) {
         this.query = query;
         this.sort = sort;
         this.strDidumean = "";

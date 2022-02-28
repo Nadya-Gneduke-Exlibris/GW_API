@@ -1,16 +1,15 @@
 package framework.response;
+
 import org.json.JSONObject;
 
 public class PrimoNMBib {
     private Record record;
 
-    public PrimoNMBib()
-    {
+    public PrimoNMBib() {
         this.record = null;
     }
 
-    public void load(JSONObject json)
-    {
+    public void load(JSONObject json) {
         JSONObject jsonRecord = json.getJSONObject("record");
         this.record = new Record();
         this.record.load(jsonRecord);

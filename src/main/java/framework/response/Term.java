@@ -6,8 +6,7 @@ public class Term {
     private String value;
 
 
-    public void print()
-    {
+    public void print() {
         System.out.println("Value: " + value);
     }
 

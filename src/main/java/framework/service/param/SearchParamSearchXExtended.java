@@ -13,8 +13,7 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
     public SearchParamSearchXExtended(String query, String sort, String strDidumean, String language, String strFrom,
                                       String strTake, String asFull, String institution, String affiliatedUser,
                                       String reverse, String sessionId, String version, String categories,
-                                      String degree, String explain, String explainDocId)
-    {
+                                      String degree, String explain, String explainDocId) {
         super(query, sort, strDidumean, language, strFrom, strTake, asFull, institution, affiliatedUser);
         this.reverse = reverse;
         this.sessionId = sessionId;
@@ -25,9 +24,8 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         this.explainDocId = explainDocId;
     }
 
-    public SearchParamSearchXExtended(String query, String institution, String categories, String strTake)
-    {
-        super(query, "rank", "", "eng","1",strTake,"false", institution,"false");
+    public SearchParamSearchXExtended(String query, String institution, String categories, String strTake) {
+        super(query, "rank", "", "eng", "1", strTake, "false", institution, "false");
         this.reverse = "false";
         this.sessionId = "api:searchX";
         this.version = "4.9.27";
@@ -37,9 +35,8 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         this.explainDocId = "";
     }
 
-    public SearchParamSearchXExtended(String query,  String sort, String reverse, String categories, String strTake)
-    {
-        super(query, sort, "", "eng","1",strTake,"false", "01HVD.01HVD.PPRD","false");
+    public SearchParamSearchXExtended(String query, String sort, String reverse, String categories, String strTake) {
+        super(query, sort, "", "eng", "1", strTake, "false", "01HVD.01HVD.PPRD", "false");
         this.reverse = reverse;
         this.sessionId = "api:searchX";
         this.version = "4.9.27";
@@ -49,8 +46,7 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         this.explainDocId = "";
     }
 
-    public SearchParamSearchXExtended()
-    {
+    public SearchParamSearchXExtended() {
         super();
         this.reverse = "false";
         this.sessionId = "api:searchX";
@@ -61,8 +57,7 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         this.explainDocId = "";
     }
 
-    public SearchParamSearchXExtended(String query)
-    {
+    public SearchParamSearchXExtended(String query) {
         super(query);
         this.reverse = "false";
         this.sessionId = "api:searchX";
@@ -73,8 +68,7 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         this.explainDocId = "";
     }
 
-    public SearchParamSearchXExtended(String query, String sort)
-    {
+    public SearchParamSearchXExtended(String query, String sort) {
         super(query, sort);
         this.reverse = "false";
         this.sessionId = "api:searchX";
@@ -85,8 +79,7 @@ public class SearchParamSearchXExtended extends SearchParamSearchX {
         this.explainDocId = "";
     }
 
-    public SearchParamSearchXExtended(String query, String sort, String strTake)
-    {
+    public SearchParamSearchXExtended(String query, String sort, String strTake) {
         super(query, sort, strTake);
         this.reverse = "false";
         this.sessionId = "api:searchX";

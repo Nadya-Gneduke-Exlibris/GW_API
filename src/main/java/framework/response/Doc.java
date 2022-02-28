@@ -11,8 +11,7 @@ public class Doc {
     private long id;
     private PrimoNMBib primoNMBib;
 
-    public Doc(long number, String searchEngineType, String searchEngine, double rank, long id, PrimoNMBib primoNMBib)
-    {
+    public Doc(long number, String searchEngineType, String searchEngine, double rank, long id, PrimoNMBib primoNMBib) {
         this.number = number;
         this.searchEngineType = searchEngineType;
         this.searchEngine = searchEngine;
@@ -21,8 +20,7 @@ public class Doc {
         this.primoNMBib = primoNMBib;
     }
 
-    public Doc()
-    {
+    public Doc() {
         this.number = 0;
         this.searchEngineType = null;
         this.searchEngine = null;
@@ -31,31 +29,25 @@ public class Doc {
         this.primoNMBib = null;
     }
 
-    public void load(JSONObject json)
-    {
-        JSONObject  jsonPrimo = json.getJSONObject("PrimoNMBib");
+    public void load(JSONObject json) {
+        JSONObject jsonPrimo = json.getJSONObject("PrimoNMBib");
 
         this.primoNMBib = new PrimoNMBib();
         this.primoNMBib.load(jsonPrimo);
 
-        if (json.has("NO"))
-        {
+        if (json.has("NO")) {
             this.number = json.getLong("NO");
         }
-        if (json.has("SEARCH_ENGINE_TYPE"))
-        {
+        if (json.has("SEARCH_ENGINE_TYPE")) {
             this.searchEngineType = json.get("SEARCH_ENGINE_TYPE").toString();
         }
-        if (json.has("SEARCH_ENGINE"))
-        {
+        if (json.has("SEARCH_ENGINE")) {
             this.searchEngine = json.get("SEARCH_ENGINE").toString();
         }
-        if (json.has("RANK"))
-        {
+        if (json.has("RANK")) {
             this.rank = json.getDouble("RANK");
         }
-        if (json.has("ID"))
-        {
+        if (json.has("ID")) {
             this.id = json.getLong("ID");
         }
     }

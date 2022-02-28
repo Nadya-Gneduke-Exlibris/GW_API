@@ -2,7 +2,7 @@ package framework.service.param;
 
 import java.util.Map;
 
-public class SearchParamCountFacets  {
+public class SearchParamCountFacets {
     private String query;
     private String sort;
     private String language;

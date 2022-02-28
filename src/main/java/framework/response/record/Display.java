@@ -29,8 +29,7 @@ public class Display {
     private String lds50;
 
 
-    public void print()
-    {
+    public void print() {
         System.out.println("********** Display **********");
         System.out.println("Title: " + this.title);
         System.out.println("Subject: " + this.subject);
@@ -58,120 +57,96 @@ public class Display {
 
     }
 
-    public void load(JSONObject json)
-    {
-        if (json.has("title"))
-        {
+    public void load(JSONObject json) {
+        if (json.has("title")) {
             this.title = json.get("title").toString();
         }
 
-        if (json.has("subject"))
-        {
+        if (json.has("subject")) {
             this.subject = json.get("subject").toString();
         }
 
-        if (json.has("creator"))
-        {
+        if (json.has("creator")) {
             this.creator = json.get("creator").toString();
         }
 
-        if (json.has("creatorcontrib"))
-        {
+        if (json.has("creatorcontrib")) {
             this.creatorContrib = json.get("creatorcontrib").toString();
         }
 
-        if (json.has("creationdate"))
-        {
+        if (json.has("creationdate")) {
             this.creationDate = json.get("creationdate").toString();
         }
 
-        if (json.has("ispartof"))
-        {
+        if (json.has("ispartof")) {
             this.isPartOf = json.get("ispartof").toString();
         }
 
-        if (json.has("contributor"))
-        {
+        if (json.has("contributor")) {
             this.contributor = json.get("contributor").toString();
         }
 
-        if (json.has("description"))
-        {
+        if (json.has("description")) {
             this.description = json.get("description").toString();
         }
 
-        if (json.has("identifier"))
-        {
+        if (json.has("identifier")) {
             this.identifier = json.get("identifier").toString();
         }
 
-        if (json.has("language"))
-        {
+        if (json.has("language")) {
             this.language = json.get("language").toString();
         }
 
-        if (json.has("publisher"))
-        {
+        if (json.has("publisher")) {
             this.publisher = json.get("publisher").toString();
         }
 
-        if (json.has("rights"))
-        {
+        if (json.has("rights")) {
             this.rights = json.get("rights").toString();
         }
 
-        if (json.has("snippet"))
-        {
+        if (json.has("snippet")) {
             this.snippet = json.get("snippet").toString();
         }
 
-        if (json.has("source"))
-        {
+        if (json.has("source")) {
             this.source = json.get("source").toString();
         }
 
-        if (json.has("type"))
-        {
+        if (json.has("type")) {
             this.type = json.get("type").toString();
         }
 
-        if (json.has("cites"))
-        {
+        if (json.has("cites")) {
             this.cites = json.get("cites").toString();
         }
 
-        if (json.has("citedby"))
-        {
+        if (json.has("citedby")) {
             this.citedBy = json.get("citedby").toString();
         }
 
-        if (json.has("oa"))
-        {
+        if (json.has("oa")) {
             this.oa = json.get("oa").toString();
         }
 
-        if (json.has("scopuscitedreferencesoriginalsourcerecordid"))
-        {
+        if (json.has("scopuscitedreferencesoriginalsourcerecordid")) {
             this.scopuscitedreferencesoriginalsourcerecordid = json.get("scopuscitedreferencesoriginalsourcerecordid").toString();
         }
 
-        if (json.has("scopuscitedreferencescount"))
-        {
+        if (json.has("scopuscitedreferencescount")) {
             this.scopuscitedreferencescount = json.get("scopuscitedreferencescount").toString();
         }
 
-        if (json.has("woscitedreferencesoriginalsourcerecordid"))
-        {
+        if (json.has("woscitedreferencesoriginalsourcerecordid")) {
             this.woscitedreferencesoriginalsourcerecordid = json.get("woscitedreferencesoriginalsourcerecordid").toString();
         }
 
-        if (json.has("woscitedreferencescount"))
-        {
+        if (json.has("woscitedreferencescount")) {
             this.woscitedreferencescount = json.get("woscitedreferencescount").toString();
         }
 
-        if (json.has("lds50"))
-        {
+        if (json.has("lds50")) {
             this.lds50 = json.get("lds50").toString();
         }
     }
@@ -180,7 +155,9 @@ public class Display {
         return lds50;
     }
 
-    public String getContributors() { return contributor; }
+    public String getContributors() {
+        return contributor;
+    }
 
     public String getCreationdate() {
         return creationDate;
@@ -262,5 +239,7 @@ public class Display {
         return woscitedreferencescount;
     }
 
-    public String getCreatorContrib() { return creatorContrib; }
+    public String getCreatorContrib() {
+        return creatorContrib;
+    }
 }

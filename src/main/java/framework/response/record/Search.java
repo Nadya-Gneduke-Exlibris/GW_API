@@ -23,102 +23,82 @@ public class Search {
     private String subject;
     private String orcidid;
 
-    public void load(JSONObject json)
-    {
-        if (json.has("creationdate"))
-        {
+    public void load(JSONObject json) {
+        if (json.has("creationdate")) {
             this.creationDate = json.get("creationdate").toString();
         }
 
-        if (json.has("creator"))
-        {
+        if (json.has("creator")) {
             this.creator = json.get("creator").toString();
         }
 
-        if (json.has("creatorcontrib"))
-        {
+        if (json.has("creatorcontrib")) {
             this.creatorContrib = json.get("creatorcontrib").toString();
         }
 
-        if (json.has("description"))
-        {
+        if (json.has("description")) {
             this.description = json.get("description").toString();
         }
 
-        if (json.has("enddate"))
-        {
+        if (json.has("enddate")) {
             this.endDate = json.get("enddate").toString();
         }
 
-        if (json.has("fulltext"))
-        {
+        if (json.has("fulltext")) {
             this.fullText = json.get("fulltext").toString();
         }
 
-        if (json.has("general"))
-        {
+        if (json.has("general")) {
             this.general = json.get("general").toString();
         }
 
-        if (json.has("issn"))
-        {
+        if (json.has("issn")) {
             this.issn = json.get("issn").toString();
         }
 
-        if (json.has("recordid"))
-        {
+        if (json.has("recordid")) {
             this.recordId = json.get("recordid").toString();
         }
 
-        if (json.has("recordtype"))
-        {
+        if (json.has("recordtype")) {
             this.recordType = json.get("recordtype").toString();
         }
 
-        if (json.has("rsrctype"))
-        {
+        if (json.has("rsrctype")) {
             this.rsrcType = json.get("rsrctype").toString();
         }
 
-        if (json.has("scope"))
-        {
+        if (json.has("scope")) {
             this.scope = json.get("scope").toString();
         }
 
-        if (json.has("sourceid"))
-        {
+        if (json.has("sourceid")) {
             this.sourceId = json.get("sourceid").toString();
         }
 
-        if (json.has("startdate"))
-        {
+        if (json.has("startdate")) {
             this.startDate = json.get("startdate").toString();
         }
 
-        if (json.has("title"))
-        {
+        if (json.has("title")) {
             this.title = json.get("title").toString();
         }
 
-        if (json.has("contributor"))
-        {
+        if (json.has("contributor")) {
             this.contributor = json.get("contributor").toString();
         }
 
-        if (json.has("subject"))
-        {
+        if (json.has("subject")) {
             this.subject = json.get("subject").toString();
         }
 
-        if (json.has("orcidid"))
-        {
+        if (json.has("orcidid")) {
             this.orcidid = json.get("orcidid").toString();
         }
 
     }
 
-    public void print()
-    {
+    public void print() {
         System.out.println("********** Search **********");
         System.out.println("creationdate: " + this.creationDate);
         System.out.println("creator: " + this.creator);

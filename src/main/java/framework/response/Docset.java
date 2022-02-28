@@ -16,9 +16,7 @@ public class Docset {
     private List<Doc> docs;
 
 
-
-    public Docset(int lastHits, int totalTime, long totalHits, int firstHit, int hitTime, List<Doc> docs)
-    {
+    public Docset(int lastHits, int totalTime, long totalHits, int firstHit, int hitTime, List<Doc> docs) {
         this.lastHits = lastHits;
         this.totalTime = totalTime;
         this.totalHits = totalHits;
@@ -27,8 +25,7 @@ public class Docset {
         this.docs = docs;
     }
 
-    public Docset()
-    {
+    public Docset() {
         this.lastHits = 0;
         this.totalTime = 0;
         this.totalHits = 0;
@@ -38,8 +35,7 @@ public class Docset {
 
     }
 
-    public void load(JSONObject json)
-    {
+    public void load(JSONObject json) {
         this.docs = new ArrayList<>();
         this.lastHits = json.getInt("LASTHIT");
         this.totalTime = json.getInt("TOTAL_TIME");
@@ -47,10 +43,8 @@ public class Docset {
         this.firstHit = json.getInt("FIRSTHIT");
         this.hitTime = json.getInt("HIT_TIME");
 
-        if (json.has("sear:DOC"))
-        {
-            if (this.totalHits == 1)
-            {
+        if (json.has("sear:DOC")) {
+            if (this.totalHits == 1) {
                 Doc doc = new Doc();
                 doc.load(json.getJSONObject("sear:DOC"));
                 this.docs.add(doc);
@@ -60,8 +54,7 @@ public class Docset {
             JSONArray jsonDocs = json.getJSONArray("sear:DOC");
 
             //add counter
-            for (Object jsonDoc : jsonDocs)
-            {
+            for (Object jsonDoc : jsonDocs) {
                 Doc doc = new Doc();
                 doc.load((JSONObject) jsonDoc);
                 this.docs.add(doc);

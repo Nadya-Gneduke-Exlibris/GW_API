@@ -13,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 
 
@@ -21,16 +22,15 @@ public class HTTPRequest {
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
 
-    public static String postRequest(String url, String request, ContentType contentType)  {
+    public static String postRequest(String url, String request, ContentType contentType) {
 
-        if (contentType == null)
-        {
+        if (contentType == null) {
             contentType = ContentType.TEXT_XML;
         }
 
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader(HttpHeaders.CONTENT_TYPE, contentType.getMimeType());
-        httpPost.setHeader("Soapaction","ddd");
+        httpPost.setHeader("Soapaction", "ddd");
         httpPost.setEntity(new StringEntity(request, contentType));
         HttpResponse httpResponse = null;
         String response = null;
@@ -41,14 +41,12 @@ public class HTTPRequest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (httpResponse == null)
-        {
+        if (httpResponse == null) {
             return null;
         }
         int status = httpResponse.getStatusLine().getStatusCode();
 
-        if (httpResponse.getStatusLine().getStatusCode() != 200)
-        {
+        if (httpResponse.getStatusLine().getStatusCode() != 200) {
             System.out.println("Status code: " + status);
             return null;
         }

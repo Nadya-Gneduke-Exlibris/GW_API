@@ -14,22 +14,18 @@ public class Facet {
 
     public void load(JSONObject json) {
 
-        if (json.has("COUNT"))
-        {
+        if (json.has("COUNT")) {
             this.count = json.getInt("COUNT");
         }
 
-        if (json.has("NAME"))
-        {
+        if (json.has("NAME")) {
             this.name = json.getString("NAME");
         }
 
-        if (json.has("sear:FACET_VALUES"))
-        {
+        if (json.has("sear:FACET_VALUES")) {
             this.facetValues = new ArrayList<>();
 
-            if (json.get("sear:FACET_VALUES").toString().startsWith("{"))
-            {
+            if (json.get("sear:FACET_VALUES").toString().startsWith("{")) {
                 JSONObject jsonfacetValue = json.getJSONObject("sear:FACET_VALUES");
                 FacetValue facetValue = new FacetValue();
                 facetValue.load(jsonfacetValue);
@@ -40,8 +36,7 @@ public class Facet {
             JSONArray jsonFacetValues = json.getJSONArray("sear:FACET_VALUES");
 
             //add counter
-            for (Object jsonFacetValue : jsonFacetValues)
-            {
+            for (Object jsonFacetValue : jsonFacetValues) {
                 FacetValue facetValue = new FacetValue();
                 facetValue.load((JSONObject) jsonFacetValue);
                 this.facetValues.add(facetValue);
@@ -49,12 +44,10 @@ public class Facet {
         }
     }
 
-    public void print()
-    {
+    public void print() {
         System.out.println("Count: " + this.count);
         System.out.println("Name: " + this.name);
-        for (FacetValue facetValue: facetValues)
-        {
+        for (FacetValue facetValue : facetValues) {
             facetValue.print();
         }
     }

@@ -7,21 +7,17 @@ public class FacetValue {
     private String key;
     private int value;
 
-    public void load(JSONObject json)
-    {
-        if (json.has("KEY"))
-        {
+    public void load(JSONObject json) {
+        if (json.has("KEY")) {
             this.key = json.get("KEY").toString();
         }
 
-        if (json.has("VALUE"))
-        {
+        if (json.has("VALUE")) {
             this.value = json.getInt("VALUE");
         }
     }
 
-    public void print()
-    {
+    public void print() {
         System.out.println("Key: " + this.key);
         System.out.println("Value: " + this.value);
     }

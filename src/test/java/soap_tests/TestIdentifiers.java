@@ -6,8 +6,6 @@ import framework.response.PrimoNMBib;
 import framework.response.Record;
 import framework.response.Result;
 import framework.response.record.Addata;
-import framework.response.record.Control;
-import framework.response.record.Display;
 import framework.service.SearchService;
 import framework.service.param.SearchParamSearchXExtended;
 import org.testng.SkipException;
@@ -30,7 +28,7 @@ public class TestIdentifiers {
     private Iterator<Object[]> dois() {
         List<Object[]> data = new ArrayList<>();
         String query = "green";
-        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "rank","10");
+        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "rank", "10");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
         if (result == null) {
@@ -43,8 +41,7 @@ public class TestIdentifiers {
             Record record = primo.getRecord();
             Addata addata = record.getAddata();
             String doi = addata.getDoi();
-            if (doi != null)
-            {
+            if (doi != null) {
                 data.add(new Object[]{doi});
             }
 
@@ -56,15 +53,13 @@ public class TestIdentifiers {
     public void searchByDOI(String doi) {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(doi);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(frontend,param);
-        if (result == null)
-        {
+        Result result = service.SearchXExtended(frontend, param);
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Addata addata = record.getAddata();
@@ -79,7 +74,7 @@ public class TestIdentifiers {
     private Iterator<Object[]> issns() {
         List<Object[]> data = new ArrayList<>();
         String query = "green";
-        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "rank","10");
+        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "rank", "10");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
         if (result == null) {
@@ -93,8 +88,7 @@ public class TestIdentifiers {
             Addata addata = record.getAddata();
             String issn = addata.getIssn();
 
-            if (issn != null)
-            {
+            if (issn != null) {
                 data.add(new Object[]{issn});
             }
 
@@ -103,27 +97,25 @@ public class TestIdentifiers {
     }
 
     @Test(dataProvider = "ISSNs")
-    public void searchByIssn(String issn)
-    {
-        String query =  "issn:(%s)".format(issn);
+    public void searchByIssn(String issn) {
+        String query = "issn:(%s)".format(issn);
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(frontend,param);
-        if (result == null)
-        {
+        Result result = service.SearchXExtended(frontend, param);
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-         Doc doc = docSet.getDocs().get(0);
+        Doc doc = docSet.getDocs().get(0);
 
-            PrimoNMBib primo = doc.getPrimoNMBib();
-            Record record = primo.getRecord();
-            Addata addata = record.getAddata();
-            String issnToTest = addata.getIssn();
-            String eissn = addata.getEissn();
+        PrimoNMBib primo = doc.getPrimoNMBib();
+        Record record = primo.getRecord();
+        Addata addata = record.getAddata();
+        String issnToTest = addata.getIssn();
+        String eissn = addata.getEissn();
 
-            assertThat("The issn or eissn should be the same as issn from query", (issnToTest.contains(issn)|| eissn.contains(issn)));
+        assertThat("The issn or eissn should be the same as issn from query", (issnToTest.contains(issn) || eissn.contains(issn)));
 
     }
 

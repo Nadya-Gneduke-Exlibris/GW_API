@@ -1,4 +1,5 @@
 package soap_tests;
+
 import framework.response.Doc;
 import framework.response.Docset;
 import framework.response.PrimoNMBib;
@@ -8,7 +9,6 @@ import framework.response.record.Control;
 import framework.response.record.Display;
 import framework.service.SearchService;
 import framework.service.param.SearchParamSearchXExtended;
-
 import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,12 +17,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-import static framework.utils.Constants.API_PREVIEW;
-import static framework.utils.Constants.API_PRODUCTION;
 import static framework.utils.Constants.API_TEST;
 import static framework.utils.Constants.HARVARDPCKEY;
-import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 import static framework.utils.Constants.SUPPORTPCKEY;
 import static framework.utils.Utils.checkQueryInDisplay;
@@ -33,14 +29,12 @@ public class TestBasicSearch {
 
 
     @Test()
-    public void resultsReturned()
-    {
+    public void resultsReturned() {
         String query = "test";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -53,13 +47,11 @@ public class TestBasicSearch {
 
 
     @Test()
-    public void resultsReturnedWithDifferentPCkeys()
-    {
-        SearchParamSearchXExtended harvardParam = new SearchParamSearchXExtended("test",HARVARDPCKEY,"","5");
+    public void resultsReturnedWithDifferentPCkeys() {
+        SearchParamSearchXExtended harvardParam = new SearchParamSearchXExtended("test", HARVARDPCKEY, "", "5");
         SearchService harvardService = new SearchService();
         Result harvardResult = harvardService.SearchXExtended(frontend, harvardParam);
-        if (harvardResult == null)
-        {
+        if (harvardResult == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -68,11 +60,10 @@ public class TestBasicSearch {
 
         System.out.println("Total hits for Harvard pckey: " + harvardTotal);
 
-        SearchParamSearchXExtended supportParam = new SearchParamSearchXExtended("test",SUPPORTPCKEY,"","5");
+        SearchParamSearchXExtended supportParam = new SearchParamSearchXExtended("test", SUPPORTPCKEY, "", "5");
         SearchService supportService = new SearchService();
         Result supportResult = supportService.SearchXExtended(frontend, supportParam);
-        if (supportResult == null)
-        {
+        if (supportResult == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -87,15 +78,13 @@ public class TestBasicSearch {
 
 
     @Test()
-    public void resultsReturnedCompressed()
-    {
+    public void resultsReturnedCompressed() {
         String query = "GiraffE";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result res = service.SearchXExtendedCompressed(frontend, param);
 
-        if (res == null)
-        {
+        if (res == null) {
             throw new SkipException("The result returned null");
         }
 
@@ -115,15 +104,13 @@ public class TestBasicSearch {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 
@@ -143,15 +130,13 @@ public class TestBasicSearch {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 
@@ -172,15 +157,13 @@ public class TestBasicSearch {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 
@@ -190,7 +173,7 @@ public class TestBasicSearch {
             String creatorContrib = display.getCreatorContrib();
 
             assertThat("search term should appear in creator or creator contrib field", (creator.toLowerCase().contains(term) ||
-                                                                    creatorContrib.toLowerCase().contains(term)));
+                    creatorContrib.toLowerCase().contains(term)));
         }
     }
 
@@ -202,15 +185,13 @@ public class TestBasicSearch {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtendedCompressed(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 
@@ -219,7 +200,7 @@ public class TestBasicSearch {
             String title = display.getTitle();
             String subject = display.getSubject();
             String description = display.getDescription();
-            assertThat("search term should appear in title, subject or description", (title.contains(query)||
+            assertThat("search term should appear in title, subject or description", (title.contains(query) ||
                     subject.contains(query) || description.contains(query)));
         }
     }
@@ -232,15 +213,13 @@ public class TestBasicSearch {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 
@@ -253,7 +232,6 @@ public class TestBasicSearch {
     }
 
 
-
     @Test()
     public void severalWordsSearchTerm() {
 
@@ -262,22 +240,20 @@ public class TestBasicSearch {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 
             Display display = record.getDisplay();
             boolean searchTermExists = checkQueryInDisplay(display, query);
 
-              assertThat("search term should appear in title, description creator or subject", searchTermExists);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
     }
 
@@ -309,15 +285,13 @@ public class TestBasicSearch {
     public void recordID(String id) {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(id);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(frontend,param);
-        if (result == null)
-        {
+        Result result = service.SearchXExtended(frontend, param);
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Control control = record.getControl();
@@ -336,15 +310,13 @@ public class TestBasicSearch {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(searchQuery);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 
@@ -358,22 +330,20 @@ public class TestBasicSearch {
 
 
     @Test()
-    public void wildCard()  {
+    public void wildCard() {
         String term = "powe";
 
         String searchQuery = String.format("( swstitle:(%s*))", term);
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(searchQuery);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
 

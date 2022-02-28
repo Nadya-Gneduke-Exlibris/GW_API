@@ -18,48 +18,42 @@ public class TestFacetCount {
     public String frontend = API_TEST + SEARCHXENDING;
 
     @Test
-    public void facetCountCompressedCategoriesLanguages()
-    {
+    public void facetCountCompressedCategoriesLanguages() {
         SearchService service = new SearchService();
         SOAPBody body = service.searchWithXML(frontend, FACETCOUNTCOMPRESSEDCATEGORIESLANGUAGES);
         System.out.println(body);
     }
 
     @Test
-    public void facetCount()
-    {
+    public void facetCount() {
         SearchService service = new SearchService();
         SOAPBody body = service.searchWithXML(frontend, FACETCOUNT);
         System.out.println(body);
     }
 
     @Test
-    public void facetCountWithCategories()
-    {
+    public void facetCountWithCategories() {
         SearchService service = new SearchService();
         SOAPBody body = service.searchWithXML(frontend, FACETCOUNTCATEGORIES);
         System.out.println(body);
     }
 
     @Test
-    public void facetCountWithCategoriesCompressed()
-    {
+    public void facetCountWithCategoriesCompressed() {
         SearchService service = new SearchService();
         SOAPBody body = service.searchWithXML(frontend, FACETCOUNTCOMPRESSEDCATEGORIES);
         System.out.println(body);
     }
 
     @Test
-    public void facetCountCompressed()
-    {
+    public void facetCountCompressed() {
         SearchService service = new SearchService();
         SOAPBody body = service.searchWithXML(frontend, FACETCOUNTCOMPRESSED);
         System.out.println(body);
     }
 
     @Test
-    public void facetCountCompressedLanguage()
-    {
+    public void facetCountCompressedLanguage() {
         SearchService service = new SearchService();
         SOAPBody body = service.searchWithXML(frontend, FACETCOUNTCOMPRESSEDLANGUAGES);
         System.out.println(body);

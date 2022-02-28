@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 
 import static framework.service.soap.SoapWebService.callSoapServiceWithRequest;
 import static framework.utils.Constants.API_PREVIEW;
-import static framework.utils.Constants.API_TEST;
 import static framework.utils.Constants.CONTENTTYPEJSON;
 import static framework.utils.Constants.RELATEDITEMS;
 
@@ -15,10 +14,9 @@ public class TestRelatedItems {
 
 
     @Test
-    public void relatedItemsJson()
-    {
+    public void relatedItemsJson() {
         String url = API_PREVIEW + RELATEDITEMS;
-        callSoapServiceWithRequest(url,rel,CONTENTTYPEJSON);
+        callSoapServiceWithRequest(url, rel, CONTENTTYPEJSON);
 
     }
 

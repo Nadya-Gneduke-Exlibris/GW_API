@@ -1,13 +1,13 @@
 package framework.response;
 
-import framework.response.record.Facets;
-import framework.response.record.Links;
-import framework.response.record.Sort;
 import framework.response.record.Addata;
 import framework.response.record.Control;
 import framework.response.record.Delivery;
 import framework.response.record.Display;
+import framework.response.record.Facets;
+import framework.response.record.Links;
 import framework.response.record.Search;
+import framework.response.record.Sort;
 import org.json.JSONObject;
 
 //TODO implement all the fields
@@ -21,8 +21,7 @@ public class Record {
     private Addata addata;
     private Facets facets;
 
-    public Record()
-    {
+    public Record() {
         this.delivery = null;
         this.search = null;
         this.display = null;
@@ -33,8 +32,7 @@ public class Record {
         this.facets = null;
     }
 
-    public Record (Delivery delivery, Search search, Display display, Control control, Links links, Sort sort, Addata addata, Facets facets)
-    {
+    public Record(Delivery delivery, Search search, Display display, Control control, Links links, Sort sort, Addata addata, Facets facets) {
         this.delivery = delivery;
         this.search = search;
         this.display = display;
@@ -45,8 +43,7 @@ public class Record {
         this.facets = facets;
     }
 
-    public void load(JSONObject json)
-    {
+    public void load(JSONObject json) {
         this.display = new Display();
         this.display.load(json.getJSONObject("display"));
 

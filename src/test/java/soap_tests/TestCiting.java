@@ -12,11 +12,8 @@ import framework.service.param.SearchParamSearchXExtended;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import static framework.utils.Constants.API_CI;
 import static framework.utils.Constants.API_TEST;
 import static framework.utils.Constants.CITING;
-import static framework.utils.Constants.HARVARDPCKEY;
-import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -46,21 +43,18 @@ public class TestCiting {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "rank", "10");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
         boolean citesExists = false;
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
             String cites = display.getCites();
-            if (cites != null)
-            {
+            if (cites != null) {
                 citesExists = true;
             }
         }

@@ -22,21 +22,18 @@ public class TestAdvancedSearch {
 
 
     @Test
-    public void anyContainsAndAnyContains()
-    {
+    public void anyContainsAndAnyContains() {
         String query = "(((greEN) AND (frOg)))";
         String searchTerms = "green frog";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -47,22 +44,19 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void titleStartsWithAndContainsAny()
-    {
+    public void titleStartsWithAndContainsAny() {
         String query = "((swstitle:(\"green*\") AND (frOg)))";
         String searchTerms = "green frog";
         String startswith = "green";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -75,23 +69,20 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void titleExactMatchContainsAny()
-    {
+    public void titleExactMatchContainsAny() {
         String query = "((title:(\"black cat\"))";
         String searchTerms = "black cat";
         String exactMatch = "black cat";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -105,22 +96,19 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void anyContainsOrAnyContains()
-    {
+    public void anyContainsOrAnyContains() {
         String query = "(((greEN) OR (frOg)))";
         String searchTerms = "green frog";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -130,22 +118,19 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void anyContainsNOTAnyContains()
-    {
+    public void anyContainsNOTAnyContains() {
         String query = "(((greEN) NOT (frOg)))";
         String searchTerms = "green";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -160,23 +145,20 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void anyContainsAnyContainsLanguage()
-    {
+    public void anyContainsAnyContainsLanguage() {
         String query = "(((berliN) AND (Karl))) AND facet_lang:(\"ger\")";
         String searchTerms = "berlin karl";
         String language = "ger";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -191,23 +173,20 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void anyContainsAnyContainsResourceType()
-    {
+    public void anyContainsAnyContainsResourceType() {
         String query = "(((water) AND (china))) AND facet_pfilter:(\"books\") ";
         String searchTerms = "water china";
         String rType = "books";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -221,23 +200,20 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void anyContainsAnyContainsCreationDate()
-    {
+    public void anyContainsAnyContainsCreationDate() {
         String query = "(((water) AND (china))) AND facet_creationdate:[2020 TO 2020]";
         String searchTerms = "water china";
         String creationDate = "2020";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -250,23 +226,20 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void anyContainsANDCreatorContains()
-    {
+    public void anyContainsANDCreatorContains() {
         String query = "(((energy) AND (Peter)))";
         String searchTerms = "energy peter";
         String creator = "Peter";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -278,23 +251,20 @@ public class TestAdvancedSearch {
     }
 
     @Test
-    public void anyContainsANDSubjectContains()
-    {
+    public void anyContainsANDSubjectContains() {
         String query = "(((energy) AND sub:(biology)))";
         String searchTerms = "energy biology";
         String subject = "biology";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
 
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();

@@ -10,27 +10,21 @@ public class Highlight {
     private List<Term> terms;
     private String field;
 
-    public void print()
-    {
-        for (Term term : this.terms)
-        {
+    public void print() {
+        for (Term term : this.terms) {
             term.print();
         }
         System.out.println("Field: " + this.field);
     }
 
-    public void load(JSONObject json)
-    {
+    public void load(JSONObject json) {
         this.terms = new ArrayList<>();
-        if (json.has("FIELD"))
-        {
+        if (json.has("FIELD")) {
             this.field = json.get("FIELD").toString();
         }
 
-        if (json.has("sear:TERM"))
-        {
-            if (json.get("sear:TERM").toString().startsWith("{"))
-            {
+        if (json.has("sear:TERM")) {
+            if (json.get("sear:TERM").toString().startsWith("{")) {
                 JSONObject jsonTerm = json.getJSONObject("sear:TERM");
                 Term term = new Term();
                 term.load(jsonTerm);
@@ -40,8 +34,7 @@ public class Highlight {
 
             JSONArray jsonTerms = json.getJSONArray("sear:TERM");
 
-            for (Object jsonTerm : jsonTerms)
-            {
+            for (Object jsonTerm : jsonTerms) {
                 Term term = new Term();
                 term.load((JSONObject) jsonTerm);
                 this.terms.add(term);

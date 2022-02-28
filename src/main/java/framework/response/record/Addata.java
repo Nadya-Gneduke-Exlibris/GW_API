@@ -30,14 +30,13 @@ public class Addata {
     private String pub;
     private String risdate;
     private String ristype;
-    private String  spage;
+    private String spage;
     private String url;
     private String volume;
     private String orcidid;
     private String oa;
 
-    public void print()
-    {
+    public void print() {
         System.out.println("********** Addata **********");
         System.out.println("articleAbstract: " + this.articleAbstract);
         System.out.println("atitle: " + this.atitle);
@@ -74,165 +73,132 @@ public class Addata {
 
     }
 
-    public void load(JSONObject json)
-    {
-        if (json.has("abstract"))
-        {
+    public void load(JSONObject json) {
+        if (json.has("abstract")) {
             this.articleAbstract = json.get("abstract").toString();
         }
 
-        if (json.has("atitle"))
-        {
+        if (json.has("atitle")) {
             this.atitle = json.get("atitle").toString();
         }
 
-        if (json.has("au"))
-        {
+        if (json.has("au")) {
             this.au = json.get("au").toString();
         }
 
-        if (json.has("auinitm"))
-        {
+        if (json.has("auinitm")) {
             this.auinitm = json.get("auinitm").toString();
         }
 
-        if (json.has("aufirst"))
-        {
+        if (json.has("aufirst")) {
             this.aufirst = json.get("aufirst").toString();
         }
 
-        if (json.has("aulast"))
-        {
+        if (json.has("aulast")) {
             this.aulast = json.get("aulast").toString();
         }
 
-        if (json.has("btitle"))
-        {
+        if (json.has("btitle")) {
             this.btitle = json.get("btitle").toString();
         }
 
-        if (json.has("pmid"))
-        {
+        if (json.has("pmid")) {
             this.pmid = json.get("pmid").toString();
         }
 
-        if (json.has("cop"))
-        {
+        if (json.has("cop")) {
             this.cop = json.get("cop").toString();
         }
 
-        if (json.has("seriestitle"))
-        {
+        if (json.has("seriestitle")) {
             this.seriesTitle = json.get("seriestitle").toString();
         }
 
-        if (json.has("date"))
-        {
+        if (json.has("date")) {
             this.date = json.get("date").toString();
         }
 
-        if (json.has("doi"))
-        {
+        if (json.has("doi")) {
             this.doi = json.get("doi").toString();
         }
 
-        if (json.has("eisbn"))
-        {
+        if (json.has("eisbn")) {
             this.eisbn = json.get("eisbn").toString();
         }
 
-        if (json.has("eissn"))
-        {
+        if (json.has("eissn")) {
             this.eissn = json.get("eissn").toString();
         }
 
-        if (json.has("epage"))
-        {
+        if (json.has("epage")) {
             this.epage = json.get("epage").toString();
         }
 
-        if (json.has("format"))
-        {
+        if (json.has("format")) {
             this.format = json.get("format").toString();
         }
 
-        if (json.has("genre"))
-        {
+        if (json.has("genre")) {
             this.genre = json.get("genre").toString();
         }
 
-        if (json.has("isbn"))
-        {
+        if (json.has("isbn")) {
             this.isbn = json.get("isbn").toString();
         }
 
-        if (json.has("issn"))
-        {
+        if (json.has("issn")) {
             this.issn = json.get("issn").toString();
         }
 
-        if (json.has("issue"))
-        {
+        if (json.has("issue")) {
             this.issue = json.get("issue").toString();
         }
 
-        if (json.has("jtitle"))
-        {
+        if (json.has("jtitle")) {
             this.jtitle = json.get("jtitle").toString();
         }
 
-        if (json.has("notes"))
-        {
+        if (json.has("notes")) {
             this.notes = json.get("notes").toString();
         }
 
-        if (json.has("oclcid"))
-        {
+        if (json.has("oclcid")) {
             this.oclcid = json.get("oclcid").toString();
         }
 
-        if (json.has("pages"))
-        {
+        if (json.has("pages")) {
             this.pages = json.get("pages").toString();
         }
 
-        if (json.has("pub"))
-        {
+        if (json.has("pub")) {
             this.pub = json.get("pub").toString();
         }
 
-        if (json.has("risdate"))
-        {
+        if (json.has("risdate")) {
             this.risdate = json.get("risdate").toString();
         }
 
-        if (json.has("ristype"))
-        {
+        if (json.has("ristype")) {
             this.ristype = json.get("ristype").toString();
         }
 
-        if (json.has("spage"))
-        {
+        if (json.has("spage")) {
             this.spage = json.get("spage").toString();
         }
 
-        if (json.has("url"))
-        {
+        if (json.has("url")) {
             this.url = json.get("url").toString();
         }
 
-        if (json.has("volume"))
-        {
+        if (json.has("volume")) {
             this.volume = json.get("volume").toString();
         }
 
-        if (json.has("orcidid"))
-        {
+        if (json.has("orcidid")) {
             this.orcidid = json.get("orcidid").toString();
         }
 
-        if (json.has("oa"))
-        {
+        if (json.has("oa")) {
             this.oa = json.get("oa").toString();
         }
 
@@ -262,7 +228,9 @@ public class Addata {
         return btitle;
     }
 
-    public String getPmids() { return pmid; }
+    public String getPmids() {
+        return pmid;
+    }
 
     public String getCop() {
         return cop;
@@ -340,7 +308,7 @@ public class Addata {
         return ristype;
     }
 
-    public String  getSpage() {
+    public String getSpage() {
         return spage;
     }
 

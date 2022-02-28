@@ -10,8 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
-
-
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeader;
 import javax.xml.soap.MimeHeaders;
@@ -19,13 +17,11 @@ import javax.xml.soap.Name;
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConnection;
 import javax.xml.soap.SOAPConnectionFactory;
-
 import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
@@ -34,9 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
 
-import static framework.utils.Constants.API_PREVIEW;
 import static framework.utils.Constants.API_TEST;
-import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 
 public class SoapWebService {
@@ -44,9 +38,7 @@ public class SoapWebService {
     private final String soapAction;
 
 
-
-    public SoapWebService()
-    {
+    public SoapWebService() {
 
         this.soapAction = "ddd";
     }
@@ -73,9 +65,7 @@ public class SoapWebService {
     }
 
 
-
-    public static String callSoapServiceWithRequest(String url, String xmlRequest, String contentType)
-    {
+    public static String callSoapServiceWithRequest(String url, String xmlRequest, String contentType) {
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -102,12 +92,11 @@ public class SoapWebService {
             in.close();
 
             // You can play with response which is available as string now:
-            String finalvalue= response.toString();
+            String finalvalue = response.toString();
             System.out.println(finalvalue);
 
             return finalvalue;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
@@ -171,7 +160,6 @@ public class SoapWebService {
     }
 
 
-
     private SOAPMessage createSOAPRequestSearchXExtended(SearchParamSearchXExtended param, boolean compressed) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
@@ -185,19 +173,18 @@ public class SoapWebService {
 
         soapMessage.saveChanges();
 
-      MimeHeaders mimeHeaders = soapMessage.getMimeHeaders();
-      JSONArray response = new JSONArray();
+        MimeHeaders mimeHeaders = soapMessage.getMimeHeaders();
+        JSONArray response = new JSONArray();
 
-      Iterator headersIterator = mimeHeaders.getAllHeaders();
+        Iterator headersIterator = mimeHeaders.getAllHeaders();
 
-      while(headersIterator.hasNext())
-      {
-            MimeHeader mimheader = (MimeHeader)headersIterator.next();
+        while (headersIterator.hasNext()) {
+            MimeHeader mimheader = (MimeHeader) headersIterator.next();
             JSONObject header = new JSONObject();
             header.accumulate("name", mimheader.getName());
             header.accumulate("value", mimheader.getValue());
             response.put(header);
-      }
+        }
 
         /* Print the request message, just for debugging purposes */
         System.out.println("Request SOAP Message:");
@@ -270,6 +257,7 @@ public class SoapWebService {
             return null;
         }
     };
+
     private void createSoapEnvelopeSearchXExtended(SOAPMessage soapMessage, SearchParamSearchXExtended param, boolean compressed) throws SOAPException {
         SOAPPart soapPart = soapMessage.getSOAPPart();
 
@@ -284,17 +272,14 @@ public class SoapWebService {
         // SOAP Body
         SOAPBody soapBody = envelope.getBody();
         SOAPElement searchX;
-        if (compressed)
-        {
+        if (compressed) {
             searchX = soapBody.addChildElement("searchXCompressed", myApi);
 
-        }
-        else
-        {
-            searchX = soapBody.addChildElement("searchX",myApi);
+        } else {
+            searchX = soapBody.addChildElement("searchX", myApi);
         }
 
-        searchX.addAttribute( encoding, "http://schemas.xmlsoap.org/soap/encoding/");
+        searchX.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         SOAPElement query = searchX.addChildElement("query", "");
         query.addTextNode(param.getQuery());
         query.addAttribute(type, "soapenc:string");
@@ -305,72 +290,72 @@ public class SoapWebService {
         sort.addTextNode(param.getSort());
         sort.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
 
-        SOAPElement reverse = searchX.addChildElement("reverse","");
+        SOAPElement reverse = searchX.addChildElement("reverse", "");
         reverse.addAttribute(type, "xsd:boolean");
         reverse.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         reverse.addTextNode(param.getReverse());
 
-        SOAPElement strDidumean = searchX.addChildElement("strDidumean","");
+        SOAPElement strDidumean = searchX.addChildElement("strDidumean", "");
         strDidumean.addAttribute(type, "soapenc:string");
         strDidumean.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         strDidumean.addTextNode(param.getStrDidumean());
 
-        SOAPElement language = searchX.addChildElement("language","");
+        SOAPElement language = searchX.addChildElement("language", "");
         language.addAttribute(type, "soapenc:string");
         language.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         language.addTextNode(param.getLanguage());
 
-        SOAPElement strFrom = searchX.addChildElement("strFrom","");
+        SOAPElement strFrom = searchX.addChildElement("strFrom", "");
         strFrom.addAttribute(type, "soapenc:string");
         strFrom.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         strFrom.addTextNode(param.getStrFrom());
 
-        SOAPElement strTake = searchX.addChildElement("strTake","");
+        SOAPElement strTake = searchX.addChildElement("strTake", "");
         strTake.addAttribute(type, "soapenc:string");
         strTake.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         strTake.addTextNode(param.getStrTake());
 
-        SOAPElement asFull = searchX.addChildElement("asFull","");
+        SOAPElement asFull = searchX.addChildElement("asFull", "");
         asFull.addAttribute(type, "xsd:boolean");
         asFull.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         asFull.addTextNode(param.getAsFull());
 
-        SOAPElement institution = searchX.addChildElement("institution","");
+        SOAPElement institution = searchX.addChildElement("institution", "");
         institution.addAttribute(type, "soapenc:string");
         institution.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         institution.addTextNode(param.getInstitution());
 
-        SOAPElement affiliatedUser = searchX.addChildElement("affiliatedUser","");
+        SOAPElement affiliatedUser = searchX.addChildElement("affiliatedUser", "");
         affiliatedUser.addAttribute(type, "xsd:boolean");
         affiliatedUser.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         affiliatedUser.addTextNode(param.getAffiliatedUser());
 
-        SOAPElement sessionId = searchX.addChildElement("sessionId","");
+        SOAPElement sessionId = searchX.addChildElement("sessionId", "");
         sessionId.addAttribute(type, "soapenc:string");
         sessionId.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         sessionId.addTextNode(param.getSessionId());
 
-        SOAPElement version = searchX.addChildElement("version","");
+        SOAPElement version = searchX.addChildElement("version", "");
         version.addAttribute(type, "soapenc:string");
         version.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         version.addTextNode(param.getVersion());
 
-        SOAPElement categories = searchX.addChildElement("categories","");
+        SOAPElement categories = searchX.addChildElement("categories", "");
         categories.addAttribute(type, "soapenc:string");
         categories.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         categories.addTextNode(param.getCategories());
 
-        SOAPElement degree = searchX.addChildElement("degree","");
+        SOAPElement degree = searchX.addChildElement("degree", "");
         degree.addAttribute(type, "soapenc:string");
         degree.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         degree.addTextNode(param.getDegree());
 
-        SOAPElement explain = searchX.addChildElement("explain","");
+        SOAPElement explain = searchX.addChildElement("explain", "");
         explain.addAttribute(type, "xsd:boolean");
         explain.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         explain.addTextNode(param.getExplain());
 
-        SOAPElement explainDocId = searchX.addChildElement("explainDocId","");
+        SOAPElement explainDocId = searchX.addChildElement("explainDocId", "");
         explainDocId.addAttribute(type, "soapenc:string");
         explainDocId.addAttribute(encoding, "http://schemas.xmlsoap.org/soap/encoding/");
         explainDocId.addTextNode(param.getExplainDocId());
@@ -450,18 +435,28 @@ public class SoapWebService {
 
     static String xmlEscapeText(String t) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < t.length(); i++){
+        for (int i = 0; i < t.length(); i++) {
             char c = t.charAt(i);
-            switch(c){
-                case '<': sb.append("&lt;"); break;
-                case '>': sb.append("&gt;"); break;
-                case '\"': sb.append("&quot;"); break;
-                case '&': sb.append("&amp;"); break;
-                case '\'': sb.append("&apos;"); break;
+            switch (c) {
+                case '<':
+                    sb.append("&lt;");
+                    break;
+                case '>':
+                    sb.append("&gt;");
+                    break;
+                case '\"':
+                    sb.append("&quot;");
+                    break;
+                case '&':
+                    sb.append("&amp;");
+                    break;
+                case '\'':
+                    sb.append("&apos;");
+                    break;
                 default:
-                    if(c>0x7e) {
-                        sb.append("&#"+((int)c)+";");
-                    }else
+                    if (c > 0x7e) {
+                        sb.append("&#" + ((int) c) + ";");
+                    } else
                         sb.append(c);
             }
         }
@@ -469,8 +464,7 @@ public class SoapWebService {
     }
 
     @Test
-    public static void test()
-    {
+    public static void test() {
         String frontend = API_TEST + SEARCHXENDING;
         String query = "ישראל";
         //query = xmlEscapeText(query);
@@ -478,8 +472,7 @@ public class SoapWebService {
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
         Docset docset = result.getDocSet();
-        for (Doc doc : docset.getDocs())
-        {
+        for (Doc doc : docset.getDocs()) {
             doc.getPrimoNMBib().getRecord().getDisplay().print();
         }
     }

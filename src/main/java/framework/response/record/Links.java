@@ -15,8 +15,7 @@ public class Links {
     public Links() {
     }
 
-    public void print()
-    {
+    public void print() {
         System.out.println("********** Links **********");
         System.out.println("linktorsrc: " + this.linktorsrc);
         System.out.println("openurl: " + this.openurl);
@@ -28,40 +27,32 @@ public class Links {
 
     }
 
-    public void load(JSONObject json)
-    {
-        if (json.has("linktorsrc"))
-        {
+    public void load(JSONObject json) {
+        if (json.has("linktorsrc")) {
             this.linktorsrc = json.get("linktorsrc").toString();
         }
 
-        if (json.has("openurl"))
-        {
+        if (json.has("openurl")) {
             this.openurl = json.get("openurl").toString();
         }
 
-        if (json.has("openurlfulltext"))
-        {
+        if (json.has("openurlfulltext")) {
             this.openurlfulltext = json.get("openurlfulltext").toString();
         }
 
-        if (json.has("thumbnail"))
-        {
+        if (json.has("thumbnail")) {
             this.thumbnail = json.get("thumbnail").toString();
         }
 
-        if (json.has("backlink"))
-        {
+        if (json.has("backlink")) {
             this.backlink = json.get("backlink").toString();
         }
 
-        if (json.has("linktopdf"))
-        {
+        if (json.has("linktopdf")) {
             this.linktopdf = json.get("linktopdf").toString();
         }
 
-        if (json.has("linktohtml"))
-        {
+        if (json.has("linktohtml")) {
             this.linktohtml = json.get("linktohtml").toString();
         }
 

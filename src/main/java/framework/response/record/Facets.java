@@ -17,8 +17,7 @@ public class Facets {
     private String topic;
     private String topLevel;
 
-    public void print()
-    {
+    public void print() {
         System.out.println("********** Facets **********");
         System.out.println("frbrType: " + this.frbrType);
         System.out.println("frbrGroupId: " + this.frbrGroupId);
@@ -34,69 +33,57 @@ public class Facets {
         System.out.println("toplevel: " + this.topLevel);
     }
 
-    public void load(JSONObject json)
-    {
-        if (json.has("frbrtype"))
-        {
+    public void load(JSONObject json) {
+        if (json.has("frbrtype")) {
             this.frbrType = json.get("frbrtype").toString();
         }
 
-        if (json.has("frbrgroupid"))
-        {
+        if (json.has("frbrgroupid")) {
             this.frbrGroupId = json.get("frbrgroupid").toString();
         }
 
-        if (json.has("rsrctype"))
-        {
+        if (json.has("rsrctype")) {
             this.rsrcType = json.get("rsrctype").toString();
         }
 
-        if (json.has("prefilter"))
-        {
+        if (json.has("prefilter")) {
             this.prefilter = json.get("prefilter").toString();
         }
 
-        if (json.has("language"))
-        {
+        if (json.has("language")) {
             this.language = json.get("language").toString();
         }
 
-        if (json.has("creationdate"))
-        {
+        if (json.has("creationdate")) {
             this.creationDate = json.get("creationdate").toString();
         }
 
-        if (json.has("creatorcontrib"))
-        {
+        if (json.has("creatorcontrib")) {
             this.creatorContrib = json.get("creatorcontrib").toString();
         }
 
-        if (json.has("collection"))
-        {
+        if (json.has("collection")) {
             this.collection = json.get("collection").toString();
         }
 
-        if (json.has("jtitle"))
-        {
+        if (json.has("jtitle")) {
             this.jTitle = json.get("jtitle").toString();
         }
 
-        if (json.has("genre"))
-        {
+        if (json.has("genre")) {
             this.genre = json.get("genre").toString();
         }
 
-        if (json.has("topics"))
-        {
+        if (json.has("topics")) {
             this.topic = json.get("topics").toString();
         }
 
-        if (json.has("toplevels"))
-        {
+        if (json.has("toplevels")) {
             this.topLevel = json.get("toplevels").toString();
         }
 
     }
+
     public String getRsrctype() {
         return rsrcType;
     }

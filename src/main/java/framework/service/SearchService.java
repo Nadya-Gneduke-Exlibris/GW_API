@@ -20,41 +20,38 @@ import static framework.utils.Utils.parseStringResponseToResultSearchX;
 public class SearchService {
 
 
-    public Result searchXMLRequest(String frontend, SearchParamSearchXExtended param)  {
+    public Result searchXMLRequest(String frontend, SearchParamSearchXExtended param) {
         System.out.println(buildSearchXExtendedRequest(param));
-        String strRes = postRequest(frontend,buildSearchXExtendedRequest(param), null);
+        String strRes = postRequest(frontend, buildSearchXExtendedRequest(param), null);
         return parseStringResponseToResultSearchX(strRes);
-     }
+    }
 
-    public Result searchXCompressedXMLRequest(String frontend, SearchParamSearchXExtended param)  {
-        String s = postRequest(frontend,buildSearchXExtendedCompressedRequest(param), null);
+    public Result searchXCompressedXMLRequest(String frontend, SearchParamSearchXExtended param) {
+        String s = postRequest(frontend, buildSearchXExtendedCompressedRequest(param), null);
         return parseStringCompressedResponseToResult(s);
     }
 
-    public FacetList facetCountXMLRequest(String frontend, String xmlRequest)  {
+    public FacetList facetCountXMLRequest(String frontend, String xmlRequest) {
         xmlRequest = xmlRequest == null ? FACETCOUNTCOMPRESSED : xmlRequest;
         String strRes = postRequest(frontend, xmlRequest, null);
         return parseStringResponseToFacetListFacetCountCompressed(strRes);
-     }
+    }
 
-    public Result SearchXExtended(String frontend, SearchParamSearchXExtended param)
-    {
+    public Result SearchXExtended(String frontend, SearchParamSearchXExtended param) {
         SoapWebService service = new SoapWebService();
         SOAPBody body = service.callSoapWebServiceSearchXExtended(frontend, param, false);
         return Utils.parseResponseToResult(body);
 
     }
 
-    public Result SearchXExtendedCompressed(String frontend, SearchParamSearchXExtended param)
-    {
+    public Result SearchXExtendedCompressed(String frontend, SearchParamSearchXExtended param) {
         SoapWebService service = new SoapWebService();
         SOAPBody body = service.callSoapWebServiceSearchXExtended(frontend, param, true);
         return Utils.parseResponseToResultCompressed(body);
 
     }
 
-    public SOAPBody searchWithXML(String url, String xmlRequest)
-    {
+    public SOAPBody searchWithXML(String url, String xmlRequest) {
         return SoapWebService.callSoapWebServiceXML(url, xmlRequest);
     }
 

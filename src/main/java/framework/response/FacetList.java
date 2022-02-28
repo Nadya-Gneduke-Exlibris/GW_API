@@ -11,34 +11,28 @@ public class FacetList {
     private List<Facet> facets;
 
 
-    public void load(JSONObject json)
-    {
+    public void load(JSONObject json) {
         this.facets = new ArrayList<>();
-        if (json.has("sear:FACET"))
-        {
+        if (json.has("sear:FACET")) {
             JSONArray jsonFacets = json.getJSONArray("sear:FACET");
 
             //add counter
-            for (Object jsonFacet : jsonFacets)
-            {
+            for (Object jsonFacet : jsonFacets) {
                 Facet facet = new Facet();
                 facet.load((JSONObject) jsonFacet);
                 this.facets.add(facet);
             }
         }
 
-        if (json.has("ACCURATE_COUNTERS"))
-        {
+        if (json.has("ACCURATE_COUNTERS")) {
             this.accurateCounters = json.getBoolean("ACCURATE_COUNTERS");
         }
     }
 
-    public void print()
-    {
+    public void print() {
         System.out.println("Accurate counters: " + this.accurateCounters);
 
-        for (Facet facet: facets)
-        {
+        for (Facet facet : facets) {
             facet.print();
         }
     }

@@ -46,23 +46,20 @@ public class TestCitations {
 
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
         boolean timesCitedExists = false;
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
             display.print();
             String scopusCount = display.getScopuscitedreferencescount();
             String wosCount = display.getWoscitedreferencescount();
-            if (scopusCount != null || wosCount != null)
-            {
+            if (scopusCount != null || wosCount != null) {
                 timesCitedExists = true;
             }
         }

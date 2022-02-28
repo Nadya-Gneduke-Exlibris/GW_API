@@ -6,7 +6,6 @@ import framework.response.PrimoNMBib;
 import framework.response.Record;
 import framework.response.Result;
 import framework.response.record.Display;
-import framework.response.record.Search;
 import framework.response.record.Sort;
 import framework.service.SearchService;
 import framework.service.param.SearchParamSearchXExtended;
@@ -18,33 +17,27 @@ import java.util.Collections;
 import java.util.List;
 
 import static framework.utils.Constants.API_TEST;
-import static framework.utils.Constants.HARVARDPCKEY;
-import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 import static framework.utils.Utils.normalizeString;
 import static org.hamcrest.MatcherAssert.assertThat;
-import org.junit.Assert;
 
 public class TestSorts {
     public String frontend = API_TEST + SEARCHXENDING;
 
     @Test
-    public void sortByTitle()
-    {
+    public void sortByTitle() {
 
         String query = "shakespeare";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "stitle");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
         List<String> titleList = new ArrayList<>();
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -60,22 +53,19 @@ public class TestSorts {
     }
 
     @Test
-    public void sortByCreator()
-    {
+    public void sortByCreator() {
 
         String query = "shakespeare";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "screator");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
         List<String> creatorList = new ArrayList<>();
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
@@ -92,31 +82,27 @@ public class TestSorts {
 
 
     @Test
-    public void sortByDateAsc()
-    {
+    public void sortByDateAsc() {
         String query = "water";
-        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query,"scdate","false","", "10");
+        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "scdate", "false", "", "10");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
         List<String> creationDatesList = new ArrayList<>();
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
 
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Sort sort = record.getSort();
             String creationDate = sort.getCreationdate();
 
-            if(creationDate != null )
-        {
-            creationDatesList.add(creationDate);
-        }
+            if (creationDate != null) {
+                creationDatesList.add(creationDate);
+            }
         }
         List<String> copy = creationDatesList;
         Collections.sort(copy);
@@ -125,29 +111,25 @@ public class TestSorts {
 
 
     @Test
-    public void sortByDateDesc()
-    {
+    public void sortByDateDesc() {
         String query = "water";
-        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query,"scdate","true","", "10");
+        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query, "scdate", "true", "", "10");
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
-        if (result == null)
-        {
+        if (result == null) {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
         List<String> creationDatesList = new ArrayList<>();
-        for (Doc doc : docSet.getDocs())
-        {
+        for (Doc doc : docSet.getDocs()) {
 
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Sort sort = record.getSort();
             String creationDate = sort.getCreationdate();
 
-            if(creationDate != null )
-            {
+            if (creationDate != null) {
                 creationDatesList.add(creationDate);
             }
         }
