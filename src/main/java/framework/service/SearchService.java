@@ -22,56 +22,41 @@ public class SearchService {
 
     public Result searchXMLRequest(String frontend, SearchParamSearchXExtended param)  {
         System.out.println(buildSearchXExtendedRequest(param));
-        String strRes = postRequest(frontend,buildSearchXExtendedRequest(param));
-        System.out.println(strRes);
-        Result res = parseStringResponseToResultSearchX(strRes);
-        return res;
-    }
+        String strRes = postRequest(frontend,buildSearchXExtendedRequest(param), null);
+        return parseStringResponseToResultSearchX(strRes);
+     }
 
     public Result searchXCompressedXMLRequest(String frontend, SearchParamSearchXExtended param)  {
-        System.out.println("JOPA");
-        String st = buildSearchXExtendedCompressedRequest(param);
-        System.out.println(st);
-        System.out.println(buildSearchXExtendedCompressedRequest(param));
-        String s = postRequest(frontend,buildSearchXExtendedCompressedRequest(param));
-        Result res = parseStringCompressedResponseToResult(s);
-        return res;
+        String s = postRequest(frontend,buildSearchXExtendedCompressedRequest(param), null);
+        return parseStringCompressedResponseToResult(s);
     }
 
-    public FacetList facetCountXMLRequest(String frontend, SearchParamSearchXExtended param)  {
-        String strRes = postRequest(frontend, FACETCOUNTCOMPRESSED);
-        FacetList res = parseStringResponseToFacetListFacetCountCompressed(strRes);
-        return res;
-    }
+    public FacetList facetCountXMLRequest(String frontend, String xmlRequest)  {
+        xmlRequest = xmlRequest == null ? FACETCOUNTCOMPRESSED : xmlRequest;
+        String strRes = postRequest(frontend, xmlRequest, null);
+        return parseStringResponseToFacetListFacetCountCompressed(strRes);
+     }
 
     public Result SearchXExtended(String frontend, SearchParamSearchXExtended param)
     {
         SoapWebService service = new SoapWebService();
         SOAPBody body = service.callSoapWebServiceSearchXExtended(frontend, param, false);
-        System.out.println("Result: " + body);
-        Result result = Utils.parseResponseToResult(body);
-        return result;
+        return Utils.parseResponseToResult(body);
+
     }
 
     public Result SearchXExtendedCompressed(String frontend, SearchParamSearchXExtended param)
     {
         SoapWebService service = new SoapWebService();
         SOAPBody body = service.callSoapWebServiceSearchXExtended(frontend, param, true);
-        Result result = null;
-        result = Utils.parseResponseToResultCompressed(body);
+        return Utils.parseResponseToResultCompressed(body);
 
-        return result;
     }
 
     public SOAPBody searchWithXML(String url, String xmlRequest)
     {
-        SoapWebService service = new SoapWebService();
-        SOAPBody body = service.callSoapWebServiceXML(url, xmlRequest);
-        return body;
+        return SoapWebService.callSoapWebServiceXML(url, xmlRequest);
     }
-
-
-
 
 }
 

@@ -11,7 +11,7 @@ public class XMLRequestBuilder {
 
     public static String buildSearchXExtendedRequest(SearchParamSearchXExtended param)
     {
-        return searchXExtendedEnvelop.format(param.getQuery(),
+        return String.format(param.getQuery(),
                                 param.getSort(),param.getReverse(),param.getStrDidumean(),param.getLanguage(),param.getStrFrom()
                                 ,param.getStrTake(), param.getAsFull(),param.getInstitution(),param.getAffiliatedUser()
                                 ,param.getSessionId(),param.getVersion(),param.getCategories(), param.getDegree()
@@ -20,7 +20,7 @@ public class XMLRequestBuilder {
 
     public static String buildSearchXExtendedCompressedRequest(SearchParamSearchXExtended param)
     {
-        return searchXExtendedCompressedEnvelop.format(param.getQuery(),
+        return String.format(param.getQuery(),
                 param.getSort(),param.getReverse(),param.getStrDidumean(),param.getLanguage(),param.getStrFrom()
                 ,param.getStrTake(), param.getAsFull(),param.getInstitution(),param.getAffiliatedUser()
                 ,param.getSessionId(),param.getVersion(),param.getCategories(), param.getDegree()
@@ -29,7 +29,7 @@ public class XMLRequestBuilder {
 
     public static String buildSearchXRequest(SearchParamSearchX param)
     {
-        return searchXEnvelop.format(param.getQuery(),
+        return String.format(param.getQuery(),
                 param.getSort(),param.getStrDidumean(),param.getLanguage(),param.getStrFrom()
                 ,param.getStrTake(), param.getAsFull(),param.getInstitution(),param.getAffiliatedUser());
     }

@@ -20,35 +20,15 @@ public class HTTPRequest {
 
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
-    public static String postRequest(String url, String request)  {
-        System.out.println(request);
-        HttpPost httpPost = new HttpPost(url);
-        httpPost.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.TEXT_XML.getMimeType());
-        httpPost.setHeader("Soapaction","ddd");
-        httpPost.setEntity(new StringEntity(request, ContentType.TEXT_XML));
-        HttpResponse httpResponse = null;
-        String response = null;
-        try {
-            httpResponse = HttpClientBuilder.create().build().execute(httpPost);
-            response = EntityUtils.toString(httpResponse.getEntity());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        int status = httpResponse.getStatusLine().getStatusCode();
+    public static String postRequest(String url, String request, ContentType contentType)  {
 
-        if (httpResponse.getStatusLine().getStatusCode() != 200)
+        if (contentType == null)
         {
-            System.out.println("Status code: " + status);
-            return null;
+            contentType = ContentType.TEXT_XML;
         }
-        return response;
-    }
-
-    public static String postRequest(String url, String request, ContentType contentType) throws IOException {
 
         HttpPost httpPost = new HttpPost(url);
-
         httpPost.setHeader(HttpHeaders.CONTENT_TYPE, contentType.getMimeType());
         httpPost.setHeader("Soapaction","ddd");
         httpPost.setEntity(new StringEntity(request, contentType));
@@ -60,6 +40,10 @@ public class HTTPRequest {
             response = EntityUtils.toString(httpResponse.getEntity());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (httpResponse == null)
+        {
+            return null;
         }
         int status = httpResponse.getStatusLine().getStatusCode();
 
@@ -77,13 +61,10 @@ public class HTTPRequest {
         httpClient.close();
     }
 
-    public void sendGet(String url) throws Exception {
+    public String sendGet(String url) throws Exception {
 
-        //HttpGet request = new HttpGet("https://www.google.com/search?q=mkyong");
+
         HttpGet request = new HttpGet(url);
-
-        // add request headers
-        //request.addHeader("", "");
 
         try (CloseableHttpResponse response = httpClient.execute(request)) {
 
@@ -94,14 +75,12 @@ public class HTTPRequest {
             Header headers = entity.getContentType();
             System.out.println(headers);
 
-            if (entity != null) {
-                // return it as a String
-                String result = EntityUtils.toString(entity);
-                System.out.println(result);
-            }
 
+            // return it as a String
+            String result = EntityUtils.toString(entity);
+            System.out.println(result);
+            return result;
         }
-
     }
 
 }

@@ -8,6 +8,7 @@ import framework.response.record.Control;
 import framework.response.record.Display;
 import framework.service.SearchService;
 import framework.service.param.SearchParamSearchXExtended;
+
 import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
+
 
 import static framework.utils.Constants.API_PREVIEW;
 import static framework.utils.Constants.API_PRODUCTION;
@@ -24,16 +25,18 @@ import static framework.utils.Constants.HARVARDPCKEY;
 import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 import static framework.utils.Constants.SUPPORTPCKEY;
+import static framework.utils.Utils.checkQueryInDisplay;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBasicSearch {
     public String frontend = API_TEST + SEARCHXENDING;
 
 
-    @Test(enabled = true)
+    @Test()
     public void resultsReturned()
     {
-        SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
+        String query = "test";
+        SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
         if (result == null)
@@ -48,34 +51,8 @@ public class TestBasicSearch {
                 docSet.getTotalHits() > 0);
     }
 
-    //TODO remove from Class
-    @Test(enabled = false)
-    public void resultsReturnedXML()
-    {
-        SearchParamSearchXExtended param = new SearchParamSearchXExtended("test");
-        SearchService service = new SearchService();
-        Result result = service.searchXCompressedXMLRequest(frontend, param);
 
-        if (result == null)
-        {
-            throw new SkipException("The result returned null");
-        }
-
-        Docset docSet = result.getDocSet();
-
-        System.out.println("Total hits: " + docSet.getTotalHits());
-        assertThat("Total hits should be greater than zero",
-                docSet.getTotalHits() > 0);
-    }
-
-    @Test
-    public void dummyTest()
-    {
-        System.out.println("Dummy");
-    }
-
-
-    @Test(enabled = false)
+    @Test()
     public void resultsReturnedWithDifferentPCkeys()
     {
         SearchParamSearchXExtended harvardParam = new SearchParamSearchXExtended("test",HARVARDPCKEY,"","5");
@@ -109,9 +86,7 @@ public class TestBasicSearch {
     }
 
 
-
-
-    @Test(enabled = false)
+    @Test()
     public void resultsReturnedCompressed()
     {
         String query = "GiraffE";
@@ -132,7 +107,7 @@ public class TestBasicSearch {
     }
 
 
-    @Test(enabled = false)
+    @Test()
     public void searchTermInTitle() {
 
         String query = "title:(photosynthesis)";
@@ -160,12 +135,11 @@ public class TestBasicSearch {
     }
 
 
-    @Test(enabled = false)
+    @Test()
     public void searchTermInSubject() {
 
         String query = "(sub:(wateR)";
         String term = "water";
-        //sub,contains,wateR
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
@@ -182,7 +156,6 @@ public class TestBasicSearch {
             Record record = primo.getRecord();
 
             Display display = record.getDisplay();
-            display.print();
 
             String subject = display.getSubject();
 
@@ -191,10 +164,10 @@ public class TestBasicSearch {
     }
 
 
-    @Test(enabled = false)
+    @Test()
     public void searchTermInCreator() {
 
-        String query = "(creator:(john)";
+        String query = "(creator:(john))";
         String term = "john";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
@@ -212,22 +185,19 @@ public class TestBasicSearch {
             Record record = primo.getRecord();
 
             Display display = record.getDisplay();
-            display.print();
 
             String creator = display.getCreator();
             String creatorContrib = display.getCreatorContrib();
 
-            assertThat("search term should appear in creator or creatoe contrib field", (creator.toLowerCase().contains(term) ||
+            assertThat("search term should appear in creator or creator contrib field", (creator.toLowerCase().contains(term) ||
                                                                     creatorContrib.toLowerCase().contains(term)));
         }
     }
 
 
-
-    @Test(enabled = false)
+    @Test()
     public void hebrewSearch() {
 
-        //TODO fix. something with encoding
         String query = "ישראל";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
@@ -245,7 +215,6 @@ public class TestBasicSearch {
             Record record = primo.getRecord();
 
             Display display = record.getDisplay();
-            display.print();
 
             String title = display.getTitle();
             String subject = display.getSubject();
@@ -255,11 +224,11 @@ public class TestBasicSearch {
         }
     }
 
-    @Test(enabled = false)
+    @Test()
     public void oneWordSearchTerm() {
 
         String query = "photosynthesis";
-        boolean searchTermExists = false;
+
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
         Result result = service.SearchXExtended(frontend, param);
@@ -276,36 +245,8 @@ public class TestBasicSearch {
             Record record = primo.getRecord();
 
             Display display = record.getDisplay();
+            boolean searchTermExists = checkQueryInDisplay(display, query);
 
-            String title = display.getTitle();
-            String description = display.getDescription();
-            String creator = display.getCreator();
-            String subject = display.getSubject();
-
-            for (String term : query.split(" "))
-            {
-                if (title != null)
-                {
-                    searchTermExists = searchTermExists ||  title.toLowerCase().contains(term);
-                }
-
-                if (description != null)
-                {
-                    searchTermExists = searchTermExists ||  description.toLowerCase().contains(term);
-                }
-
-                if (creator != null)
-                {
-                    searchTermExists = searchTermExists ||  creator.toLowerCase().contains(term);
-                }
-
-                if (subject != null)
-                {
-                    searchTermExists = searchTermExists ||  subject.toLowerCase().contains(term);
-                }
-
-
-            }
 
             assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
@@ -313,12 +254,10 @@ public class TestBasicSearch {
 
 
 
-    @Test(enabled = false)
+    @Test()
     public void severalWordsSearchTerm() {
 
-        //TODO fix
         String query = "green cat";
-        boolean searchTermExists = false;
 
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
@@ -336,35 +275,9 @@ public class TestBasicSearch {
             Record record = primo.getRecord();
 
             Display display = record.getDisplay();
-            String title = display.getTitle();
-            String description = display.getDescription();
-            String creator = display.getCreator();
-            String subject = display.getSubject();
-            for (String term : query.split(" "))
-            {
-                if (title != null)
-                {
-                    searchTermExists = searchTermExists || title.toLowerCase().contains(term);
-                }
+            boolean searchTermExists = checkQueryInDisplay(display, query);
 
-                if (description != null)
-                {
-                    searchTermExists = searchTermExists || description.toLowerCase().contains(term);
-                }
-
-                if (creator != null)
-                {
-                    searchTermExists = searchTermExists || creator.toLowerCase().contains(term);
-                }
-
-                if (subject != null)
-                {
-                    searchTermExists = searchTermExists || subject.toLowerCase().contains(term);
-                }
-
-            }
-
-            assertThat("search term should appear in title, description creator or subject", searchTermExists);
+              assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
     }
 
@@ -374,7 +287,7 @@ public class TestBasicSearch {
         String query = "green energy";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.searchXMLRequest(frontend, param);
+        Result result = service.SearchXExtendedCompressed(frontend, param);
         if (result == null) {
             throw new SkipException("The result returned null");
         }
@@ -392,7 +305,7 @@ public class TestBasicSearch {
     }
 
 
-    @Test(dataProvider = "recordsIds", enabled = false)
+    @Test(dataProvider = "recordsIds")
     public void recordID(String id) {
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(id);
         SearchService service = new SearchService();
@@ -415,7 +328,7 @@ public class TestBasicSearch {
     }
 
 
-    @Test(enabled = false)
+    @Test()
     public void startsWith() {
 
         String term = "Richard";
@@ -438,16 +351,16 @@ public class TestBasicSearch {
             Display display = record.getDisplay();
 
             String title = display.getTitle();
-            System.out.println(title);
+
             assertThat("search term should appear in title, description creator or subject", title.toLowerCase().startsWith(term.toLowerCase()));
         }
     }
 
 
-    @Test(enabled = false)
+    @Test()
     public void wildCard()  {
         String term = "powe";
-        boolean searchTermExists = false;
+
         String searchQuery = String.format("( swstitle:(%s*))", term);
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(searchQuery);
         SearchService service = new SearchService();
@@ -465,30 +378,7 @@ public class TestBasicSearch {
             Record record = primo.getRecord();
 
             Display display = record.getDisplay();
-            String title = display.getTitle();
-            String description = display.getDescription();
-            String creator = display.getCreator();
-            String subject = display.getSubject();
-
-            if (title != null)
-            {
-                searchTermExists = searchTermExists || title.contains(term);
-            }
-
-            if (description != null)
-            {
-                searchTermExists = searchTermExists || description.contains(term);
-            }
-
-            if (creator != null)
-            {
-                searchTermExists = searchTermExists || creator.contains(term);
-            }
-
-            if (subject != null)
-            {
-                searchTermExists = searchTermExists || subject.contains(term);
-            }
+            boolean searchTermExists = checkQueryInDisplay(display, term);
 
             assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }

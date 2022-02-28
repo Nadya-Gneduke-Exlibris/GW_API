@@ -19,7 +19,7 @@ public class TestHighlights {
     @Test
     public void highlightItTitle() {
 
-        String frontend = LOADBALANCER + SEARCHXENDING;
+        String frontend = API_TEST + SEARCHXENDING;
         String query = "dog";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();

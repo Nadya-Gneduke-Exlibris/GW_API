@@ -12,6 +12,9 @@ public class Links {
     private String linktopdf;
     private String linktohtml;
 
+    public Links() {
+    }
+
     public void print()
     {
         System.out.println("********** Links **********");
@@ -54,7 +57,7 @@ public class Links {
 
         if (json.has("linktopdf"))
         {
-            this.linktohtml = json.get("linktopdf").toString();
+            this.linktopdf = json.get("linktopdf").toString();
         }
 
         if (json.has("linktohtml"))

@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import static framework.utils.Constants.API_CI;
 import static framework.utils.Constants.API_TEST;
+import static framework.utils.Constants.CITING;
 import static framework.utils.Constants.HARVARDPCKEY;
 import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
@@ -23,8 +24,8 @@ public class TestCiting {
 
     @Test
     public void citingGet() throws Exception {
-        String url = "http://api1.test.cdi.dc04.hosted.exlibrisgroup.com:8011/primo_library/libweb/webservices/rest/v1/connections/citing?groupids=11,12,77,88&institution=staging.972QA.VOLCANO&isKnownUser=staging.972QA.VOLCANO&isKnownUser=true&clientVersion=4.9.2";
-
+        String query = "groupids=11,12,77,88&institution=staging.972QA.VOLCANO&isKnownUser=staging.972QA.VOLCANO&isKnownUser=true&clientVersion=4.9.2";
+        String url = API_TEST + CITING + query;
         HTTPRequest obj = new HTTPRequest();
 
         try {
@@ -57,7 +58,6 @@ public class TestCiting {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
-            display.print();
             String cites = display.getCites();
             if (cites != null)
             {

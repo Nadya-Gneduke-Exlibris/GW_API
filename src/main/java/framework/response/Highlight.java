@@ -33,7 +33,7 @@ public class Highlight {
             {
                 JSONObject jsonTerm = json.getJSONObject("sear:TERM");
                 Term term = new Term();
-                term.load((JSONObject) jsonTerm);
+                term.load(jsonTerm);
                 this.terms.add(term);
                 return;
             }

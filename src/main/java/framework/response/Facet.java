@@ -32,7 +32,7 @@ public class Facet {
             {
                 JSONObject jsonfacetValue = json.getJSONObject("sear:FACET_VALUES");
                 FacetValue facetValue = new FacetValue();
-                facetValue.load((JSONObject) jsonfacetValue);
+                facetValue.load(jsonfacetValue);
                 this.facetValues.add(facetValue);
                 return;
             }

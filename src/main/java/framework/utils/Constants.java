@@ -7,12 +7,16 @@ public class Constants {
 
     public static final String API_CI = "http://api1.ci.cdi.dc04.hosted.exlibrisgroup.com:8011";
     public static final String API_TEST = "http://api1.test.cdi.dc04.hosted.exlibrisgroup.com:8011";
-
     public static final String API_PREVIEW = "http://api1.preview.cdi.dc04.hosted.exlibrisgroup.com:8011";
     public static final String API_PRODUCTION = "http://api1.prod.cdi.dc04.hosted.exlibrisgroup.com:8011";
 
     public static final String SEARCHXENDING = "/PrimoWebServices/services/primo/JaguarPrimoSearcher";
+    public static final String CITATIONS = "/primo_library/libweb/webservices/rest/v1/connections/citations?";
+    public static final String CITEDBY = "/primo_library/libweb/webservices/rest/v1/connections/citedby?";
+    public static final String CITING = "/primo_library/libweb/webservices/rest/v1/connections/citing?";
+    public static final String RELATEDITEMS = "/primo_library/libweb/webservices/rest/v1/connections/relatedItems?";
 
+    public static final String CONTENTTYPEJSON = "application/json";
 
     public static final String HARVARDPCKEY = "01HVD.01HVD.PPRD";
     public static final String NEWMEXPCKEY = "01NEWMEX.01NEWMEX_INST_CDI_DEMO_LIB.PSTG";
@@ -23,6 +27,8 @@ public class Constants {
     public static final String CDI_TEST = "searchCDI=test";
     public static final String CDI_PREVIEW = "searchCDI=preview";
     public static final String CDI_CI = "searchCDI=ci";
+
+    public static int SIZE_IN_BYTES = 1000000;
 
     public static String searchXExtendedEnvelop = "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:api=\"http://api.ws.primo.exlibris.com\">\n" +
             "   <soapenv:Header/>\n" +
@@ -1237,9 +1243,6 @@ public class Constants {
             "      </api:searchX>\n" +
             "   </soapenv:Body>\n" +
             "</soapenv:Envelope>\n";
-
-
-
 
 
 }

@@ -14,44 +14,12 @@ import org.testng.annotations.Test;
 
 import static framework.utils.Constants.API_TEST;
 import static framework.utils.Constants.SEARCHXENDING;
+import static framework.utils.Utils.checkQueryInDisplay;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestAdvancedSearch {
     public String frontend = API_TEST + SEARCHXENDING;
 
-    boolean checkTermsInDisplay(Display display, String searchTerms)
-    {
-        boolean searchTermExists = false;
-
-        String title = display.getTitle();
-        String description = display.getDescription();
-        String creator = display.getCreator();
-        String subject = display.getSubject();
-
-        for (String term : searchTerms.split(" "))
-        {
-            if (title != null)
-            {
-                searchTermExists = searchTermExists ||  title.toLowerCase().contains(term.toLowerCase());
-            }
-
-            if (description != null)
-            {
-                searchTermExists = searchTermExists ||  description.toLowerCase().contains(term.toLowerCase());
-            }
-
-            if (creator != null)
-            {
-                searchTermExists = searchTermExists ||  creator.toLowerCase().contains(term.toLowerCase());
-            }
-
-            if (subject != null)
-            {
-                searchTermExists = searchTermExists ||  subject.toLowerCase().contains(term.toLowerCase());
-            }
-        }
-        return searchTermExists;
-    }
 
     @Test
     public void anyContainsAndAnyContains()
@@ -60,22 +28,21 @@ public class TestAdvancedSearch {
         String searchTerms = "green frog";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
 
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
     }
 
@@ -87,20 +54,20 @@ public class TestAdvancedSearch {
         String startswith = "green";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
             assertThat("title should starts with given term", (display.getTitle().toLowerCase().startsWith(startswith) ||
                     display.getTitle().toLowerCase().startsWith("the " + startswith) ||
                     display.getTitle().toLowerCase().startsWith("a " + startswith)));
@@ -115,14 +82,14 @@ public class TestAdvancedSearch {
         String exactMatch = "black cat";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
@@ -130,9 +97,9 @@ public class TestAdvancedSearch {
             Display display = record.getDisplay();
             display.print();
 
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
             assertThat("exact search term should appear in title", display.getTitle().toLowerCase().contains(exactMatch));
         }
     }
@@ -144,21 +111,21 @@ public class TestAdvancedSearch {
         String searchTerms = "green frog";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
         }
     }
 
@@ -169,26 +136,25 @@ public class TestAdvancedSearch {
         String searchTerms = "green";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
-        boolean termNotExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
 
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
-            termNotExists = !checkTermsInDisplay(display, "frog");
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
+            boolean termNotExists = !checkQueryInDisplay(display, "frog");
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
-            assertThat("search term should not appear in title, description creator or subject", termNotExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
+            assertThat("search term should not appear in title, description creator or subject", termNotExists);
 
         }
     }
@@ -201,14 +167,14 @@ public class TestAdvancedSearch {
         String language = "ger";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
@@ -216,9 +182,9 @@ public class TestAdvancedSearch {
             Display display = record.getDisplay();
             Facets facets = record.getFacets();
 
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
             assertThat("record should have specific language", facets.getLanguage().contains(language));
 
         }
@@ -232,14 +198,14 @@ public class TestAdvancedSearch {
         String rType = "books";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
@@ -247,9 +213,9 @@ public class TestAdvancedSearch {
             Display display = record.getDisplay();
             Facets facets = record.getFacets();
 
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
             assertThat("record should be from specific resource type", facets.getRsrctype().contains(rType));
         }
     }
@@ -262,23 +228,23 @@ public class TestAdvancedSearch {
         String creationDate = "2020";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
             Facets facets = record.getFacets();
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
             assertThat("record should have specific creation date", (facets.getCreationdate().contains(creationDate)));
         }
     }
@@ -291,22 +257,22 @@ public class TestAdvancedSearch {
         String creator = "Peter";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
             assertThat("record should have specific creator", (display.getCreator().contains(creator)));
         }
     }
@@ -319,24 +285,23 @@ public class TestAdvancedSearch {
         String subject = "biology";
         SearchParamSearchXExtended param = new SearchParamSearchXExtended(query);
         SearchService service = new SearchService();
-        Result result = service.SearchXExtended(API_TEST + SEARCHXENDING, param);
+        Result result = service.SearchXExtended(frontend, param);
         if (result == null)
         {
             throw new SkipException("The result returned null");
         }
 
         Docset docSet = result.getDocSet();
-        boolean searchTermExists = false;
+
         for (Doc doc : docSet.getDocs())
         {
             PrimoNMBib primo = doc.getPrimoNMBib();
             Record record = primo.getRecord();
             Display display = record.getDisplay();
-            System.out.println(display.getSubject().toLowerCase());
-            Facets facets = record.getFacets();
-            searchTermExists = checkTermsInDisplay(display, searchTerms);
 
-            assertThat("search term should appear in title, description creator or subject", searchTermExists == true);
+            boolean searchTermExists = checkQueryInDisplay(display, searchTerms);
+
+            assertThat("search term should appear in title, description creator or subject", searchTermExists);
             assertThat("record should have specific subject", (display.getSubject().toLowerCase().contains(subject)));
         }
     }

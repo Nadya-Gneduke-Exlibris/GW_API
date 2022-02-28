@@ -13,6 +13,7 @@ import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import static framework.utils.Constants.API_TEST;
+import static framework.utils.Constants.CITEDBY;
 import static framework.utils.Constants.LOADBALANCER;
 import static framework.utils.Constants.SEARCHXENDING;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,8 +22,8 @@ public class TestCitedBy {
 
     @Test
     public void citatedByGet() throws Exception {
-        String url = "http://api1.test.cdi.dc04.hosted.exlibrisgroup.com:8011/primo_library/libweb/webservices/rest/v1/connections/citedby?groupids=11,12,77,88&institution=staging.972QA.VOLCANO&isKnownUser=staging.972QA.VOLCANO&isKnownUser=true&clientVersion=4.9.2";
-
+        String query = "groupids=11,12,77,88&institution=staging.972QA.VOLCANO&isKnownUser=staging.972QA.VOLCANO&isKnownUser=true&clientVersion=4.9.2";
+        String url = API_TEST + CITEDBY + query;
         HTTPRequest obj = new HTTPRequest();
 
         try {

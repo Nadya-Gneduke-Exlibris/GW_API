@@ -41,7 +41,7 @@ import static framework.utils.Constants.SEARCHXENDING;
 
 public class SoapWebService {
     private SOAPBody body;
-    private String soapAction;
+    private final String soapAction;
 
 
 
@@ -77,13 +77,12 @@ public class SoapWebService {
     public static String callSoapServiceWithRequest(String url, String xmlRequest, String contentType)
     {
         try {
-            //String url = "http://api1.ci.cdi.dc04.hosted.exlibrisgroup.com:8011/PrimoWebServices/services/primo/JaguarPrimoSearcher";
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
             // change these values as per soapui request on top left of request, click on RAW, you will find all the headers
             con.setRequestMethod("POST");
-            String content = "%s; charset=utf-8".format(contentType);
+            String content = String.format("%s; charset=utf-8", contentType);
             con.setRequestProperty("Content-Type", content);
             //con.setRequestProperty("Content-Type","text/xml; charset=utf-8");
             con.setDoOutput(true);
@@ -96,46 +95,7 @@ public class SoapWebService {
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            // You can play with response which is available as string now:
-            String finalvalue= response.toString();
-            System.out.println(finalvalue);
-
-            return finalvalue;
-        }
-        catch (Exception e) {
-            return e.getMessage();
-        }
-    }
-
-    public static String callSoapServiceWithRequestGet(String url, String contentType)
-    {
-        try {
-            //String url = "http://api1.ci.cdi.dc04.hosted.exlibrisgroup.com:8011/PrimoWebServices/services/primo/JaguarPrimoSearcher";
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-            // change these values as per soapui request on top left of request, click on RAW, you will find all the headers
-            con.setRequestMethod("GET");
-            String content = "%s; charset=utf-8".format(contentType);
-            con.setRequestProperty("Content-Type", content);
-            //con.setRequestProperty("Content-Type","text/xml; charset=utf-8");
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            //wr.writeBytes();
-            wr.flush();
-            wr.close();
-            String responseStatus = con.getResponseMessage();
-            System.out.println(responseStatus);
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
@@ -167,16 +127,10 @@ public class SoapWebService {
 
             MimeHeaders mimeHeaders = new MimeHeaders();
             mimeHeaders.setHeader("SOAPAction", "ddd");
-            //mimeHeaders.addHeader("Content-Type", "text/xml");
             mimeHeaders.addHeader("cache-control", "no-cache");
-
             mimeHeaders.addHeader("Content-Type", "application/soap+xml");
 
             SOAPMessage soapMessage = messageFactory.createMessage(mimeHeaders, new ByteArrayInputStream(xmlRequest.getBytes()));
-
-            /*System.out.println("Request SOAP Message:");
-            soapMessage.writeTo(System.out);
-            System.out.println("\n");*/
 
             SOAPMessage soapResponse = soapConnection.call(soapMessage, url);
 
@@ -201,10 +155,8 @@ public class SoapWebService {
             //SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(), this.param.getFrontend());
 
             String frontend = "http://fe.p.prod.primo.saas.exlibrisgroup.com:1701/PrimoWebServices/services/primo/JaguarPrimoSearcher";
-            //String frontend = "http://api1.test.cdi.dc04.hosted.exlibrisgroup.com:8011/PrimoWebServices/services/primo/JaguarPrimoSearcher";
 
-
-            System.out.println(frontend);
+            System.out.println("Frontend: " + frontend);
 
             SOAPMessage soapResponse = soapConnection.call(createSOAPRequestSearchX(param), frontend);
 
@@ -224,37 +176,28 @@ public class SoapWebService {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
 
-        createSoapEnvelopeSearchXExtended2(soapMessage, param, compressed);
+        createSoapEnvelopeSearchXExtended(soapMessage, param, compressed);
 
         MimeHeaders headers = soapMessage.getMimeHeaders();
         headers.addHeader("SOAPAction", soapAction);
-        //headers.addHeader("Content-Type", "text/xml");
         headers.addHeader("Cache-Control", "no-cache");
         headers.addHeader("Content-Type", "text/xml;charset=utf-8");
-        //"Content-type", "text/xml; charset=utf-8"
-
-
-
 
         soapMessage.saveChanges();
 
+      MimeHeaders mimeHeaders = soapMessage.getMimeHeaders();
+      JSONArray response = new JSONArray();
 
+      Iterator headersIterator = mimeHeaders.getAllHeaders();
 
-        MimeHeaders h1 = soapMessage.getMimeHeaders();
-        JSONArray response = new JSONArray();
-        if (headers != null) {
-            Iterator headersIterator = h1.getAllHeaders();
-
-            while(headersIterator.hasNext()) {
-                MimeHeader mimheader = (MimeHeader)headersIterator.next();
-                JSONObject header = new JSONObject();
-                header.accumulate("name", mimheader.getName());
-                header.accumulate("value", mimheader.getValue());
-                response.put(header);
-            }
-        }
-        System.out.println(response);
-
+      while(headersIterator.hasNext())
+      {
+            MimeHeader mimheader = (MimeHeader)headersIterator.next();
+            JSONObject header = new JSONObject();
+            header.accumulate("name", mimheader.getName());
+            header.accumulate("value", mimheader.getValue());
+            response.put(header);
+      }
 
         /* Print the request message, just for debugging purposes */
         System.out.println("Request SOAP Message:");
@@ -283,64 +226,6 @@ public class SoapWebService {
         return soapMessage;
     }
 
-
-
-
-    private void createSoapEnvelopeSearchXExtended(SOAPMessage soapMessage, SearchParamSearchXExtended param, boolean compressed) throws SOAPException {
-        SOAPPart soapPart = soapMessage.getSOAPPart();
-
-        String myApi = "api";
-        String myNamespaceURI = "http://api.ws.primo.exlibris.com";
-
-        // SOAP Envelope
-        SOAPEnvelope envelope = soapPart.getEnvelope();
-        envelope.addNamespaceDeclaration(myApi, myNamespaceURI);
-
-        // SOAP Body
-        SOAPBody soapBody = envelope.getBody();
-        SOAPElement searchX;
-        if (compressed == true)
-        {
-            searchX = soapBody.addChildElement("searchXCompressed", myApi);
-        }
-        else
-        {
-            searchX = soapBody.addChildElement("searchX", myApi);
-        }
-
-        SOAPElement query = searchX.addChildElement("query", myApi);
-        query.addTextNode(param.getQuery());
-        SOAPElement sort = searchX.addChildElement("sort", myApi);
-        sort.addTextNode(param.getSort());
-        SOAPElement reverse = searchX.addChildElement("reverse", myApi);
-        reverse.addTextNode(param.getReverse());
-        SOAPElement strDidumean = searchX.addChildElement("strDidumean", myApi);
-        strDidumean.addTextNode(param.getStrDidumean());
-        SOAPElement language = searchX.addChildElement("language", myApi);
-        language.addTextNode(param.getLanguage());
-        SOAPElement strFrom = searchX.addChildElement("strFrom", myApi);
-        strFrom.addTextNode(param.getStrFrom());
-        SOAPElement strTake = searchX.addChildElement("strTake", myApi);
-        strTake.addTextNode(param.getStrTake());
-        SOAPElement asFull = searchX.addChildElement("asFull", myApi);
-        asFull.addTextNode(param.getAsFull());
-        SOAPElement institution = searchX.addChildElement("institution", myApi);
-        institution.addTextNode(param.getInstitution());
-        SOAPElement affiliatedUser = searchX.addChildElement("affiliatedUser", myApi);
-        affiliatedUser.addTextNode(param.getAffiliatedUser());
-        SOAPElement sessionId = searchX.addChildElement("sessionId", myApi);
-        sessionId.addTextNode(param.getSessionId());
-        SOAPElement version = searchX.addChildElement("version", myApi);
-        version.addTextNode(param.getVersion());
-        SOAPElement categories = searchX.addChildElement("categories", myApi);
-        categories.addTextNode(param.getCategories());
-        SOAPElement degree = searchX.addChildElement("degree", myApi);
-        degree.addTextNode(param.getDegree());
-        SOAPElement explain = searchX.addChildElement("explain", myApi);
-        explain.addTextNode(param.getExplain());
-        SOAPElement explainDocId = searchX.addChildElement("explainDocId", myApi);
-        explainDocId.addTextNode(param.getExplainDocId());
-    }
 
     Name type = new Name() {
         @Override
@@ -385,7 +270,7 @@ public class SoapWebService {
             return null;
         }
     };
-    private void createSoapEnvelopeSearchXExtended2(SOAPMessage soapMessage, SearchParamSearchXExtended param, boolean compressed) throws SOAPException {
+    private void createSoapEnvelopeSearchXExtended(SOAPMessage soapMessage, SearchParamSearchXExtended param, boolean compressed) throws SOAPException {
         SOAPPart soapPart = soapMessage.getSOAPPart();
 
         String myApi = "api";
@@ -399,7 +284,7 @@ public class SoapWebService {
         // SOAP Body
         SOAPBody soapBody = envelope.getBody();
         SOAPElement searchX;
-        if (compressed == true)
+        if (compressed)
         {
             searchX = soapBody.addChildElement("searchXCompressed", myApi);
 
@@ -558,7 +443,7 @@ public class SoapWebService {
         SOAPElement strTake = searchX.addChildElement("searchToken", myApi);
         strTake.addTextNode("null");
         SOAPElement asFull = searchX.addChildElement("<categories ", myApi);
-        strTake.addTextNode("");
+        asFull.addTextNode("");
 
 
     }
@@ -598,6 +483,5 @@ public class SoapWebService {
             doc.getPrimoNMBib().getRecord().getDisplay().print();
         }
     }
-
 
 }

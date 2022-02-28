@@ -41,7 +41,7 @@ public class Result {
 
     public void loadHighlights(JSONObject json)
     {
-        if (json.has("sear:HIGHLIGHTS") && json.get("sear:HIGHLIGHTS").toString() != "")
+        if (json.has("sear:HIGHLIGHTS") && !json.get("sear:HIGHLIGHTS").toString().equals(""))
         {
             JSONObject highlights = json.getJSONObject("sear:HIGHLIGHTS");
             this.highlights = new Highlights();

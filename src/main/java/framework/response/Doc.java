@@ -13,6 +13,11 @@ public class Doc {
 
     public Doc(long number, String searchEngineType, String searchEngine, double rank, long id, PrimoNMBib primoNMBib)
     {
+        this.number = number;
+        this.searchEngineType = searchEngineType;
+        this.searchEngine = searchEngine;
+        this.rank = rank;
+        this.id = id;
         this.primoNMBib = primoNMBib;
     }
 
